@@ -1,12 +1,14 @@
 /*
  * =================================================================
  * FILE TO UPDATE: /components/JapaCounter.tsx
- * Removed the deprecated `shadow*` props to fix the warning.
- * The functionality remains the same.
+ * Fixed version using expo-av (more stable for bundled assets)
  * =================================================================
  */
 import { StorageService } from '@/services/StorageService';
-import React, { useState } from 'react';
+import { Ionicons } from '@expo/vector-icons';
+import { Audio } from 'expo-av';
+import * as Haptics from 'expo-haptics';
+import React, { useEffect, useRef, useState } from 'react';
 import { Alert, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 type JapaCounterProps = { onJapaSaved: () => void; };
@@ -14,8 +16,54 @@ type JapaCounterProps = { onJapaSaved: () => void; };
 export default function JapaCounter({ onJapaSaved }: JapaCounterProps) {
   const [count, setCount] = useState<number>(0);
   const [malas, setMalas] = useState<number>(0);
+  const [isFeedbackEnabled, setIsFeedbackEnabled] = useState(true);
+  const tickSound = useRef<Audio.Sound | null>(null);
+
+  // Effect to load the tick sound effect
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadSound = async () => {
+      try {
+        if (isMounted) {
+          const { sound } = await Audio.Sound.createAsync(
+            require('../assets/audio/Effect_Tick.mp3')
+          );
+          tickSound.current = sound;
+        }
+      } catch (error) {
+        console.error("Failed to load tick sound:", error);
+      }
+    };
+
+    loadSound();
+
+    // Cleanup function to unload the sound
+    return () => {
+      isMounted = false;
+      tickSound.current?.unloadAsync();
+    };
+  }, []);
+
+  const playFeedback = async () => {
+    if (isFeedbackEnabled) {
+      // Trigger haptic feedback
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      
+      // Play sound effect using expo-av
+      try {
+        if (tickSound.current) {
+          await tickSound.current.replayAsync();
+        }
+      } catch (error) {
+        console.error("Failed to play tick sound", error);
+      }
+    }
+  };
 
   const handlePress = () => {
+    playFeedback(); // Play feedback on every press
+
     if (count === 107) {
       setCount(0);
       setMalas(prevMalas => prevMalas + 1);
@@ -53,10 +101,23 @@ export default function JapaCounter({ onJapaSaved }: JapaCounterProps) {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity 
+        style={styles.feedbackToggle} 
+        onPress={() => setIsFeedbackEnabled(!isFeedbackEnabled)}
+      >
+        <Ionicons 
+          name={isFeedbackEnabled ? "volume-high" : "volume-mute"} 
+          size={24} 
+          color="#888" 
+        />
+      </TouchableOpacity>
+
       <Text style={styles.malaCount}>{malas} Mālā{malas !== 1 ? 's' : ''}</Text>
+      
       <TouchableOpacity style={styles.mainButton} onPress={handlePress} activeOpacity={0.7}>
         <Text style={styles.countText}>{count}</Text>
       </TouchableOpacity>
+
       <View style={styles.buttonRow}>
         <TouchableOpacity style={styles.actionButton} onPress={handleSave}>
             <Text style={styles.actionButtonText}>Save & Reset</Text>
@@ -70,9 +131,28 @@ export default function JapaCounter({ onJapaSaved }: JapaCounterProps) {
 }
 
 const styles = StyleSheet.create({
-    container: { alignItems: 'center', padding: 20, backgroundColor: '#1E1E1E', borderRadius: 20, margin: 20 },
-    malaCount: { fontSize: 32, fontWeight: '300', color: '#E0E0E0', marginBottom: 20 },
-    // Removed shadow properties and added elevation for Android for a similar effect without warnings.
+    container: { 
+      alignItems: 'center', 
+      padding: 20, 
+      backgroundColor: '#1E1E1E', 
+      borderRadius: 20, 
+      margin: 20,
+      position: 'relative',
+    },
+    feedbackToggle: {
+      position: 'absolute',
+      top: 15,
+      right: 15,
+      padding: 5,
+      zIndex: 1, // Ensure it's tappable
+    },
+    malaCount: { 
+      fontSize: 32, 
+      fontWeight: '300', 
+      color: '#E0E0E0', 
+      marginBottom: 20,
+      marginTop: 20,
+    },
     mainButton: { 
         width: 220, 
         height: 220, 

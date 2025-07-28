@@ -6,6 +6,7 @@
  * =================================================================
  */
 import AudioPlayer from '@/components/AudioPlayer';
+import RecitationLogger from '@/components/RecitationLogger';
 import { STOTRAS, Stanza } from '@/data/stotras';
 import { useSadhanaAudioPlayer } from '@/hooks/useAudioPlayer';
 import { Stack, useFocusEffect, useLocalSearchParams } from 'expo-router';
@@ -106,6 +107,7 @@ export default function StotraDetailScreen() {
         keyExtractor={keyExtractor}
         renderItem={renderItem}
         ListHeaderComponent={headerComponent}
+        ListFooterComponent={<RecitationLogger stotra={stotra} />}
         contentContainerStyle={detailStyles.scrollContent}
         // PERFORMANCE OPTIMIZATIONS
         removeClippedSubviews={true}

@@ -1,8 +1,8 @@
 /*
  * =================================================================
  * FILE TO UPDATE: /app/stotra/[id].tsx
- * This screen now correctly uses `useFocusEffect` to pause audio
- * when the user navigates away. This is the key fix.
+ * Fixed version with proper error handling to prevent crashes
+ * when navigating away while audio is playing.
  * =================================================================
  */
 import AudioPlayer from '@/components/AudioPlayer';
@@ -27,17 +27,25 @@ export default function StotraDetailScreen() {
   // The hook is now called at the top level of the screen component
   const { player, status } = useSadhanaAudioPlayer(stotra?.audio || 'kal_bhairav.mp3');
 
-  // CRITICAL FIX: This effect handles pausing the audio when the screen is unfocused
+  // FIXED: Added proper error handling and null checks
   useFocusEffect(
     React.useCallback(() => {
       // This runs when the screen comes into focus
       return () => {
         // This cleanup function runs when the screen goes out of focus
-        if (player && status.playing) {
-          player.pause();
+        try {
+          if (player && status?.playing) {
+            // Check if player is still valid before calling pause
+            if (typeof player.pause === 'function') {
+              player.pause();
+            }
+          }
+        } catch (error) {
+          // Silently handle the error - this is expected when the player is already released
+          console.log('Audio player already released - this is normal when navigating away');
         }
       };
-    }, [player, status.playing]) // Dependencies ensure the effect is managed correctly
+    }, [player, status?.playing]) // Added optional chaining for status
   );
 
   if (!stotra) {

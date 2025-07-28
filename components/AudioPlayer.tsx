@@ -1,8 +1,7 @@
 /*
  * =================================================================
  * FILE TO UPDATE: /components/AudioPlayer.tsx
- * This component is now responsible for handling user interactions
- * and calling the appropriate methods on the player instance.
+ * Added error handling to prevent crashes when player is released.
  * =================================================================
  */
 import { Ionicons } from '@expo/vector-icons';
@@ -29,39 +28,55 @@ export default function AudioPlayer({ player, status }: AudioPlayerProps) {
 
   const togglePlayback = () => {
     if (!player) return;
-    if (status.playing) {
-      player.pause();
-    } else {
-      player.play();
+    try {
+      if (status?.playing) {
+        player.pause();
+      } else {
+        player.play();
+      }
+    } catch (error) {
+      console.log('Audio player operation failed - player may have been released');
     }
   };
 
   const changeRate = (rate: number) => {
     if (!player) return;
-    player.setPlaybackRate(rate);
+    try {
+      player.setPlaybackRate(rate);
+    } catch (error) {
+      console.log('Failed to change playback rate - player may have been released');
+    }
   };
 
   const handleSeekStart = () => {
     if (!player) return;
-    setWasPlayingBeforeSeek(status.playing);
-    if (status.playing) {
-      player.pause();
+    try {
+      setWasPlayingBeforeSeek(status?.playing || false);
+      if (status?.playing) {
+        player.pause();
+      }
+    } catch (error) {
+      console.log('Failed to pause for seeking - player may have been released');
     }
   };
 
   const handleSeekComplete = (positionMillis: number) => {
     if (!player) return;
-    player.seekTo(positionMillis / 1000); // convert ms to seconds for the player
-    if (wasPlayingBeforeSeek) {
-      player.play();
+    try {
+      player.seekTo(positionMillis / 1000); // convert ms to seconds for the player
+      if (wasPlayingBeforeSeek) {
+        player.play();
+      }
+    } catch (error) {
+      console.log('Failed to seek - player may have been released');
     }
   };
 
   const playbackRates = [1.0, 1.25, 1.5, 2.0];
-  const isLoading = !status.isLoaded;
-  const isPlaying = status.playing;
-  const positionMillis = status.currentTime * 1000;
-  const durationMillis = status.duration ? status.duration * 1000 : null;
+  const isLoading = !status?.isLoaded;
+  const isPlaying = status?.playing || false;
+  const positionMillis = (status?.currentTime || 0) * 1000;
+  const durationMillis = status?.duration ? status.duration * 1000 : null;
   const playbackRate = player?.playbackRate ?? 1.0;
 
   return (

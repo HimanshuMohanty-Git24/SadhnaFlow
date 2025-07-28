@@ -13,7 +13,7 @@ export type Stanza = {
 export type Stotra = {
   id: string;
   title: string;
-  audio: 'kal_bhairav.mp3' | 'bhairava_stotra.mp3' | 'hanuman_chalisa.mp3' | 'Ashtottara_bhairav.mp3';
+  audio: 'kal_bhairav.mp3' | 'bhairava_stotra.mp3' | 'hanuman_chalisa.mp3' | 'Ashtottara_bhairav.mp3' | 'Bhairav_tandav.mp3';
   stanzas: Stanza[];
 };
 
@@ -661,6 +661,101 @@ Ram Lakhan Sita sahit hriday basahu sur bhuup ॥`,
         { sanskrit: `ॐ वैद्याय नमः।`, transliteration: `Om Vaidyaya Namah।`, translation: `Salutations to the supreme physician.` },
         { sanskrit: `ॐ प्रभवे नमः।`, transliteration: `Om Prabhave Namah।`, translation: `Salutations to the supreme lord.` },
         { sanskrit: `ॐ विष्णवे नमः।`, transliteration: `Om Vishnave Namah।`, translation: `Salutations to the all-pervading one.` },
+    ]
+  },
+  {
+    id: '5',
+    title: 'Bhairava Tandava Stotra',
+    audio: 'Bhairav_tandav.mp3',
+    stanzas: [
+        {
+            sanskrit: `ॐ चण्डं प्रतिचण्डं करधृतदण्डं कृतरिपुखण्डं सौख्यकरं
+लोकं सुखयन्तं विलसितवन्तं प्रकटितदन्तं नृत्यकरम् ।
+डमरुध्वनिशङ्खं तरलवतंसं मधुरहसन्तं लोकभरं
+भज भज भूतेशं प्रकटमहेशं भैरववेषं कष्टहरम् ॥ १॥`,
+            transliteration: `Om Chandam Pratichandam Karadhruta-Dandam Kritaripu-Khandam Saukhyakaram
+Lokam Sukhayantam Vilasita-Vantam Prakathita-Dantam Nrutyakaram |
+Damarudhvani-Shankham Tarala-Vatamsam Madhura-Hasantam Lokabharam
+Bhaja Bhaja Bhutesham Prakata-Mahesham Bhairava-Vesham Kashtaharam ||1||`,
+            translation: `Salutations to Bhairava, who wields the staff, who cuts down enemies, who bestows happiness and joy, who delights the world with his divine play, who reveals his teeth in a smile, and who is ever engaged in the cosmic dance. His damaru sounds like a conch, his crest ornaments flow gracefully, his sweet laughter fills the world. Worship, worship the Lord of beings, the manifest Maheshwara, Bhairava who removes all troubles.`
+        },
+        {
+            sanskrit: `चर्चितसिन्दूरं रणभूविदूरं दुष्टविदूरं श्रीनिकरं
+किङ्किणिगणरावं त्रिभुवनपावं खर्प्परसावं पुण्यभरम् ।
+करुणामयवेशं सकलसुरेशं मुक्तसुकेशं पापहरं
+भज भज भूतेशं प्रकटमहेशं श्रीभैरववेषं कष्टहरम् ॥ २॥`,
+            transliteration: `Charchita-Sinduram Ranabhu-Viduram Dushta-Viduram Shrinikaram
+Kinkini-Ganaraavam Tribhuvana-Paavam Kharrpara-Saavam Punyabharam |
+Karunamaya-Vesham Sakala-Suresham Mukta-Sukesham Papa-Haram
+Bhaja Bhaja Bhutesham Prakata-Mahesham Shri-Bhairava-Vesham Kashtaharam ||2||`,
+            translation: `Adorned with red sindoor, far removed from the battlefield, far from the wicked, revered by all, whose anklets jingle as he dances, who purifies the three worlds, who carries a skull bowl filled with merit. He is compassionate in form, lord of all gods, with flowing hair, remover of sins. Worship, worship the Lord of beings, the manifest Maheshwara, Shri Bhairava who removes all troubles.`
+        },
+        {
+            sanskrit: `कलिमलसंहारं मदनविहारं फणिपतिहारं शीघ्रकरं
+कलुषं शमयन्तं परिभृतसन्तं मत्तदृगन्तं शुद्धतरम् ।
+गतिनिन्दितकेशं नर्तनदेशं स्वच्छकशं सन्मुण्डकरं
+भज भज भूतेशं प्रकटमहेशं श्रीभैरववेषं कष्टहरम् ॥ ३॥`,
+            transliteration: `Kalimala-Samharam Madana-Viharam Phanipati-Haram Shighrakaram
+Kalusham Shamayantam Paribhrutasantam Mattadrugantan Shuddhatarama |
+Gati-Ninditakesham Nartana-Desham Svachchakasam Sanmundakaram
+Bhaja Bhaja Bhutesham Prakata-Mahesham Shri-Bhairava-Vesham Kashtaharam ||3||`,
+            translation: `The destroyer of the impurities of the Kali Yuga, the one who enjoys divine play, who removes the pride of serpents, who acts swiftly, who calms the agitated, who delights the hearts of devotees, who is purest of the pure. His flowing hair moves gracefully, he is the lord of dance, with clear vision, whose skull is holy. Worship, worship the Lord of beings, the manifest Maheshwara, Shri Bhairava who removes all troubles.`
+        },
+        {
+            sanskrit: `कठिनस्तनकुम्भं सुकृतं सुलभं कालीडिम्भं खड्गधरं
+वृतभूतपिशाचं स्फुटमृदुवाचं स्निग्धसुकाचं भक्तभरम् ।
+तनुभाजितशेषं विलमसुदेशं कष्टसुरेशं प्रीतिनरं
+भज भज भूतेशं प्रकटमहेशं श्रीभैरववेषं कष्टहरम् ॥ ४॥`,
+            transliteration: `Kathina-Stana-Kumbham Sukrutam Sulabham Kalidimbham Khadgadharam
+Vruta-Bhuta-Pishacham Sphuta-Mrudu-Vacham Snigdha-Sukacham Bhaktabharam |
+Tanu-Bhajita-Shesham Vilama-Sudesham Kashta-Suresham Pritinaram
+Bhaja Bhaja Bhutesham Prakata-Mahesham Shri-Bhairava-Vesham Kashtaharam ||4||`,
+            translation: `Who holds the mountain-like breasts of the goddess Kali, who is easily pleased by good deeds, who is Kali's child, who wields a sword, who commands spirits and ghosts, whose words are soft yet clear, who is affectionate towards devotees. His body is adorned with serpents, he dwells in beautiful places, he is the lord who removes difficulties, delighting his devotees. Worship, worship the Lord of beings, the manifest Maheshwara, Shri Bhairava who removes all troubles.`
+        },
+        {
+            sanskrit: `ललिताननचन्द्रं सुमनवितन्द्रं बोधितमन्द्रं श्रेष्ठवरं
+सुखिताखिललोकं परिगतशोकं शुद्धविलोकं पुष्टिकरम् ।
+वरदाभयहारं तरलिततारं क्षुद्रविदारं तुष्टिकरं
+भज भज भूतेशं प्रकटमहेशं श्रीभैरववेषं कष्टहरम् ॥ ५॥`,
+            transliteration: `Lalita-Anana-Chandram Sumana-Vitandram Bodhita-Mandram Shreshtavaram
+Sukhita-Akhila-Lokam Parigata-Shokam Shuddha-Vilokam Pushtikaram |
+Varada-Abhaya-Haram Taralita-Taram Kshudra-Vidaram Tushtikaram
+Bhaja Bhaja Bhutesham Prakata-Mahesham Shri-Bhairava-Vesham Kashtaharam ||5||`,
+            translation: `Whose face shines like the full moon, who is surrounded by fragrant flowers, who awakens mantras, who is the best among all, who brings joy to the world, who dispels sorrow, who is pure in vision, and who bestows nourishment. He grants boons and fearlessness, his eyes sparkle like stars, he destroys the small-minded, bringing satisfaction. Worship, worship the Lord of beings, the manifest Maheshwara, Shri Bhairava who removes all troubles.`
+        },
+        {
+            sanskrit: `सकलायुधभारं विजनविहारं सुश्रविशारं भ्रष्टमलं
+शरणागतपालं मृगमदभालं सञ्जितकालं स्वेष्टबलम् ।
+पदनूपूरसिञ्जं त्रिनयनकञ्जं गुणिजनरञ्जन कुष्टहरं
+भज भज भूतेशं प्रकटमहेशं श्रीभैरववेषं कष्टहरम् ॥ ६॥`,
+            transliteration: `Sakala-Ayudha-Bharam Vijana-Viharam Sushrava-Visharam Brashta-Malam
+Sharanagata-Palam Mrugamada-Bhalam Sanjita-Kalam Sveshta-Balam |
+Pada-Nupura-Sinjam Trinayana-Kanjam Gunijana-Ranjan Kushta-Haram
+Bhaja Bhaja Bhutesham Prakata-Mahesham Shri-Bhairava-Vesham Kashtaharam ||6||`,
+            translation: `Who carries all weapons, who wanders in solitude, who is adorned with fragrant substances, who is free from impurities, who protects those who seek refuge, who wears musk on his forehead, who conquers time, who fulfills the wishes of his devotees. His anklets make sweet sounds, his three eyes are like lotuses, he delights the virtuous, removing diseases. Worship, worship the Lord of beings, the manifest Maheshwara, Shri Bhairava who removes all troubles.`
+        },
+        {
+            sanskrit: `मर्दयितुसरावं प्रकटितभावं विश्वसुभावं ज्ञानपदं
+रक्तांशुकजोषं परिकृततोषं नाशितदोषं सन्मतिदम् ।
+कुटिलभ्रुकुटीकं ज्वरधननीकं विसरन्धीकं प्रेमभरं
+भज भज भूतेशं प्रकटमहेशं श्रीभैरववेषं कष्टहरम् ॥ ७॥`,
+            transliteration: `Mardayitu-Saravam Prakathita-Bhavam Viswa-Subhavam Jnana-Padam
+Rakta-Amshuka-Josham Parikruta-Tosham Nashita-Dosham Sanmati-Dam |
+Kutila-Bhru-Kutikam Jvara-Dhana-Nikam Visara-Ndhikam Prema-Bharam
+Bhaja Bhaja Bhutesham Prakata-Mahesham Shri-Bhairava-Vesham Kashtaharam ||7||`,
+            translation: `Who crushes all enemies, who reveals his nature, who is the embodiment of auspiciousness for the world, who is the abode of knowledge, who wears red garments, who is satisfied with devotion, who removes all faults, who bestows wisdom. With curved eyebrows forming a beautiful arch, who destroys fever and wealth-robbing diseases, who spreads rapidly, full of love. Worship, worship the Lord of beings, the manifest Maheshwara, Shri Bhairava who removes all troubles.`
+        },
+        {
+            sanskrit: `परिनिर्जितकामं विलसितवामं योगिजनाभं योगेशं
+बहुमद्यपनाथं गीतसुगाथं कष्टसुनाथं वीरेशम् ।
+कलयन्तमशेषं भृतजनदेशं नृत्यसुरेशं वीरेशं
+भज भज भूतेशं प्रकटमहेशं श्रीभैरववेषं कष्टहरम् ॥ ८॥`,
+            transliteration: `Parinirjita-Kamam Vilasita-Vamam Yogijana-Bham Yogesham
+Bahu-Madhya-Panatham Githa-Sugatham Kashta-Sunatham Viresham |
+Kalayantam-Ashesham Bhrutajana-Desham Nrutya-Suresham Viresham
+Bhaja Bhaja Bhutesham Prakata-Mahesham Shri-Bhairava-Vesham Kashtaharam ||8||`,
+            translation: `Who has conquered desires, who manifests in the left-hand path, who is revered by yogis, who is the lord of yoga, who is the master of all sacrifices, who is praised in sacred songs, who is the remover of difficulties, who is the lord of heroes. Who encompasses everything, who guides devoted people, who is the lord of divine dance, the lord of heroes. Worship, worship the Lord of beings, the manifest Maheshwara, Shri Bhairava who removes all troubles.`
+        }
     ]
   }
 ];

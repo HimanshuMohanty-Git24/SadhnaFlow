@@ -15,6 +15,7 @@ const resolveAudioSource = (fileName: Stotra['audio']) => {
     case 'bhairava_stotra.mp3': return require('../assets/audio/bhairava_stotra.mp3');
     case 'hanuman_chalisa.mp3': return require('../assets/audio/hanuman_chalisa.mp3');
     case 'Ashtottara_bhairav.mp3': return require('../assets/audio/Ashtottara_bhairav.mp3');
+    case 'Bhairav_tandav.mp3': return require('../assets/audio/Bhairav_tandav.mp3');
     default: throw new Error(`Unknown audio file: ${fileName}`);
   }
 };

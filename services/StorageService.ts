@@ -87,6 +87,17 @@ export interface GratitudeNote {
 }
 const GRATITUDE_NOTES_KEY = 'gratitude_notes';
 
+
+// --- NEW: Goal Types and Functions ---
+export type GoalType = 'spiritual' | 'material';
+export interface Goal {
+  id: string; // Unique ID, e.g., timestamp
+  type: GoalType;
+  title: string;
+  isCompleted: boolean;
+}
+const GOALS_KEY = 'goals_list';
+
 const saveGratitudeNote = async (note: GratitudeNote): Promise<void> => {
     try {
         const notes = await getGratitudeNotes();
@@ -119,6 +130,53 @@ const getGratitudeNotes = async (): Promise<GratitudeNote[]> => {
 };
 
 
+const getGoals = async (): Promise<Goal[]> => {
+    try {
+        const jsonValue = await AsyncStorage.getItem(GOALS_KEY);
+        return jsonValue != null ? JSON.parse(jsonValue) : [];
+    } catch (e) {
+        console.error("Error fetching goals", e);
+        return [];
+    }
+};
+
+const saveGoal = async (newGoal: Goal): Promise<void> => {
+    try {
+        const goals = await getGoals();
+        goals.unshift(newGoal); // Add to the beginning
+        const jsonValue = JSON.stringify(goals);
+        await AsyncStorage.setItem(GOALS_KEY, jsonValue);
+    } catch (e) {
+        console.error("Error saving goal", e);
+    }
+};
+
+const updateGoalStatus = async (goalId: string, isCompleted: boolean): Promise<void> => {
+    try {
+        const goals = await getGoals();
+        const goalIndex = goals.findIndex(g => g.id === goalId);
+        if (goalIndex > -1) {
+            goals[goalIndex].isCompleted = isCompleted;
+            const jsonValue = JSON.stringify(goals);
+            await AsyncStorage.setItem(GOALS_KEY, jsonValue);
+        }
+    } catch (e) {
+        console.error("Error updating goal status", e);
+    }
+};
+
+const deleteGoal = async (goalId: string): Promise<void> => {
+    try {
+        const goals = await getGoals();
+        const updatedGoals = goals.filter(g => g.id !== goalId);
+        const jsonValue = JSON.stringify(updatedGoals);
+        await AsyncStorage.setItem(GOALS_KEY, jsonValue);
+    } catch (e) {
+        console.error("Error deleting goal", e);
+    }
+};
+
+
 // --- Export all functions ---
 export const StorageService = {
   saveJapaSession,
@@ -127,4 +185,8 @@ export const StorageService = {
   getRecitationLogs,
   saveGratitudeNote,
   getGratitudeNotes,
+  getGoals,
+  saveGoal,
+  updateGoalStatus,
+  deleteGoal,
 };

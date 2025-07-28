@@ -1,24 +1,41 @@
 /*
  * =================================================================
  * FILE TO UPDATE: /app/stotra/[id].tsx
- * Fixed version with proper error handling to prevent crashes
- * when navigating away while audio is playing.
+ * Optimized version with performance improvements and memoization
+ * to fix the VirtualizedList warning
  * =================================================================
  */
 import AudioPlayer from '@/components/AudioPlayer';
 import { STOTRAS, Stanza } from '@/data/stotras';
 import { useSadhanaAudioPlayer } from '@/hooks/useAudioPlayer';
 import { Stack, useFocusEffect, useLocalSearchParams } from 'expo-router';
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
-const StanzaItem = ({ item }: { item: Stanza }) => (
-    <View style={detailStyles.stanzaContainer}>
-        <Text style={detailStyles.sanskritText}>{item.sanskrit}</Text>
-        <Text style={detailStyles.transliterationText}>{item.transliteration}</Text>
-        <Text style={detailStyles.translationText}>{item.translation}</Text>
-    </View>
-);
+// PERFORMANCE FIX: Memoized StanzaItem component
+const StanzaItem = memo(({ item }: { item: Stanza }) => (
+  <View style={detailStyles.stanzaContainer}>
+    <Text style={detailStyles.sanskritText}>{item.sanskrit}</Text>
+    <Text style={detailStyles.transliterationText}>{item.transliteration}</Text>
+    <Text style={detailStyles.translationText}>{item.translation}</Text>
+  </View>
+));
+
+// PERFORMANCE FIX: Memoized Header component
+const ListHeader = memo(({ 
+  title, 
+  player, 
+  status 
+}: { 
+  title: string;
+  player: any;
+  status: any;
+}) => (
+  <>
+    <Text style={detailStyles.title}>{title}</Text>
+    <AudioPlayer player={player} status={status} />
+  </>
+));
 
 export default function StotraDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -27,9 +44,25 @@ export default function StotraDetailScreen() {
   // The hook is now called at the top level of the screen component
   const { player, status } = useSadhanaAudioPlayer(stotra?.audio || 'kal_bhairav.mp3');
 
+  // PERFORMANCE FIX: Memoized renderItem function
+  const renderItem = useCallback(({ item }: { item: Stanza }) => (
+    <StanzaItem item={item} />
+  ), []);
+
+  // PERFORMANCE FIX: Memoized keyExtractor function
+  const keyExtractor = useCallback((item: Stanza, index: number) => 
+    `${stotra?.id || 'default'}-stanza-${index}`, [stotra?.id]);
+
+  // PERFORMANCE FIX: Memoized getItemLayout for better scrolling performance
+  const getItemLayout = useCallback((data: any, index: number) => ({
+    length: 150, // Approximate height of each stanza item
+    offset: 150 * index,
+    index,
+  }), []);
+
   // FIXED: Added proper error handling and null checks
   useFocusEffect(
-    React.useCallback(() => {
+    useCallback(() => {
       // This runs when the screen comes into focus
       return () => {
         // This cleanup function runs when the screen goes out of focus
@@ -50,25 +83,39 @@ export default function StotraDetailScreen() {
 
   if (!stotra) {
     return (
-      <SafeAreaView style={detailStyles.container}><Text style={detailStyles.title}>Stotra not found</Text></SafeAreaView>
+      <SafeAreaView style={detailStyles.container}>
+        <Text style={detailStyles.title}>Stotra not found</Text>
+      </SafeAreaView>
     );
   }
+
+  // PERFORMANCE FIX: Memoized header component
+  const headerComponent = useCallback(() => (
+    <ListHeader 
+      title={stotra.title}
+      player={player}
+      status={status}
+    />
+  ), [stotra.title, player, status]);
 
   return (
     <SafeAreaView style={detailStyles.container}>
       <Stack.Screen options={{ title: stotra.title }} />
       <FlatList
         data={stotra.stanzas}
-        keyExtractor={(item, index) => `${stotra.id}-stanza-${index}`}
-        renderItem={({ item }) => <StanzaItem item={item} />}
-        ListHeaderComponent={
-          <>
-            <Text style={detailStyles.title}>{stotra.title}</Text>
-            {/* We pass the player and status down to the UI component */}
-            <AudioPlayer player={player} status={status} />
-          </>
-        }
+        keyExtractor={keyExtractor}
+        renderItem={renderItem}
+        ListHeaderComponent={headerComponent}
         contentContainerStyle={detailStyles.scrollContent}
+        // PERFORMANCE OPTIMIZATIONS
+        removeClippedSubviews={true}
+        maxToRenderPerBatch={10}
+        updateCellsBatchingPeriod={50}
+        initialNumToRender={10}
+        windowSize={10}
+        getItemLayout={getItemLayout}
+        // Disable nested scrolling optimizations that can cause issues
+        nestedScrollEnabled={false}
       />
     </SafeAreaView>
   );

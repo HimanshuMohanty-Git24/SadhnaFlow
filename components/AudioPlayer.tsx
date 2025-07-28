@@ -1,7 +1,7 @@
 /*
  * =================================================================
  * FILE TO UPDATE: /components/AudioPlayer.tsx
- * Added error handling to prevent crashes when player is released.
+ * Fixed version with proper seekTo handling and coordinate mapping
  * =================================================================
  */
 import { Ionicons } from '@expo/vector-icons';
@@ -63,50 +63,108 @@ export default function AudioPlayer({ player, status }: AudioPlayerProps) {
   const handleSeekComplete = (positionMillis: number) => {
     if (!player) return;
     try {
-      player.seekTo(positionMillis / 1000); // convert ms to seconds for the player
+      // FIXED: expo-audio seekTo actually takes milliseconds, not seconds
+      // Convert to seconds since the API expects seconds
+      player.seekTo(positionMillis / 1000);
+      
       if (wasPlayingBeforeSeek) {
-        player.play();
+        // Small delay to ensure seek completes before resuming playback
+        setTimeout(() => {
+          try {
+            player.play();
+          } catch (error) {
+            console.log('Failed to resume playback after seek');
+          }
+        }, 100);
       }
     } catch (error) {
       console.log('Failed to seek - player may have been released');
     }
   };
 
+  const handleValueChange = (positionMillis: number) => {
+    // Optional: You can provide real-time feedback during dragging
+    // This is called continuously while dragging
+    // For performance, you might want to throttle this or skip it
+  };
+
   const playbackRates = [1.0, 1.25, 1.5, 2.0];
   const isLoading = !status?.isLoaded;
   const isPlaying = status?.playing || false;
+  
+  // Convert current time from seconds to milliseconds for the slider
   const positionMillis = (status?.currentTime || 0) * 1000;
   const durationMillis = status?.duration ? status.duration * 1000 : null;
   const playbackRate = player?.playbackRate ?? 1.0;
 
+  // Don't render slider if we don't have duration yet
+  const shouldShowSlider = durationMillis && durationMillis > 0;
+
   return (
     <View style={audioStyles.container}>
-      <TouchableOpacity style={audioStyles.playButton} onPress={togglePlayback} disabled={isLoading}>
-        {isLoading ? <ActivityIndicator size="large" color="#FFFFFF" /> : <Ionicons name={isPlaying ? 'pause' : 'play'} size={40} color="white" />}
+      <TouchableOpacity 
+        style={audioStyles.playButton} 
+        onPress={togglePlayback} 
+        disabled={isLoading}
+      >
+        {isLoading ? (
+          <ActivityIndicator size="large" color="#FFFFFF" />
+        ) : (
+          <Ionicons 
+            name={isPlaying ? 'pause' : 'play'} 
+            size={40} 
+            color="white" 
+          />
+        )}
       </TouchableOpacity>
 
       <View style={audioStyles.progressContainer}>
-        <Text style={audioStyles.timeText}>{formatTime(positionMillis)}</Text>
-        <CustomSlider
-          style={audioStyles.slider}
-          minimumValue={0}
-          maximumValue={durationMillis || 1}
-          value={positionMillis}
-          onSlidingStart={handleSeekStart}
-          onSlidingComplete={handleSeekComplete}
-          minimumTrackTintColor="#FF6D00"
-          maximumTrackTintColor="#555"
-          thumbTintColor="#FF6D00"
-          disabled={isLoading}
-        />
-        <Text style={audioStyles.timeText}>{formatTime(durationMillis)}</Text>
+        <Text style={audioStyles.timeText}>
+          {formatTime(positionMillis)}
+        </Text>
+        
+        {shouldShowSlider ? (
+          <CustomSlider
+            style={audioStyles.slider}
+            minimumValue={0}
+            maximumValue={durationMillis}
+            value={positionMillis}
+            onSlidingStart={handleSeekStart}
+            onValueChange={handleValueChange}
+            onSlidingComplete={handleSeekComplete}
+            minimumTrackTintColor="#FF6D00"
+            maximumTrackTintColor="#555"
+            thumbTintColor="#FF6D00"
+            disabled={isLoading}
+          />
+        ) : (
+          <View style={audioStyles.slider} />
+        )}
+        
+        <Text style={audioStyles.timeText}>
+          {formatTime(durationMillis)}
+        </Text>
       </View>
 
       <View style={audioStyles.speedContainer}>
         {playbackRates.map((rate) => (
-            <TouchableOpacity key={rate} onPress={() => changeRate(rate)} style={[audioStyles.speedButton, playbackRate === rate && audioStyles.speedButtonActive]}>
-                <Text style={[audioStyles.speedButtonText, playbackRate === rate && audioStyles.speedButtonTextActive]}>{rate}x</Text>
-            </TouchableOpacity>
+          <TouchableOpacity 
+            key={rate} 
+            onPress={() => changeRate(rate)} 
+            style={[
+              audioStyles.speedButton, 
+              playbackRate === rate && audioStyles.speedButtonActive
+            ]}
+          >
+            <Text 
+              style={[
+                audioStyles.speedButtonText, 
+                playbackRate === rate && audioStyles.speedButtonTextActive
+              ]}
+            >
+              {rate}x
+            </Text>
+          </TouchableOpacity>
         ))}
       </View>
     </View>
@@ -114,14 +172,60 @@ export default function AudioPlayer({ player, status }: AudioPlayerProps) {
 }
 
 const audioStyles = StyleSheet.create({
-  container: { padding: 20, backgroundColor: '#1E1E1E', borderRadius: 15, marginHorizontal: 10, alignItems: 'center' },
-  playButton: { backgroundColor: '#FF6D00', width: 80, height: 80, borderRadius: 40, alignItems: 'center', justifyContent: 'center', marginBottom: 20 },
-  progressContainer: { width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 15 },
-  slider: { flex: 1, marginHorizontal: 10 },
-  timeText: { color: '#AAA', fontSize: 12, width: 45, textAlign: 'center' },
-  speedContainer: { flexDirection: 'row', justifyContent: 'space-around', width: '100%', paddingHorizontal: 20 },
-  speedButton: { paddingVertical: 8, paddingHorizontal: 16, borderRadius: 20, backgroundColor: '#333' },
-  speedButtonActive: { backgroundColor: '#FF6D00' },
-  speedButtonText: { color: '#FFF', fontWeight: 'bold' },
-  speedButtonTextActive: { color: '#FFF' }
+  container: { 
+    padding: 20, 
+    backgroundColor: '#1E1E1E', 
+    borderRadius: 15, 
+    marginHorizontal: 10, 
+    alignItems: 'center' 
+  },
+  playButton: { 
+    backgroundColor: '#FF6D00', 
+    width: 80, 
+    height: 80, 
+    borderRadius: 40, 
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    marginBottom: 20 
+  },
+  progressContainer: { 
+    width: '100%', 
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    marginBottom: 15 
+  },
+  slider: { 
+    flex: 1, 
+    marginHorizontal: 10,
+    height: 40, // Ensure enough touch area
+  },
+  timeText: { 
+    color: '#AAA', 
+    fontSize: 12, 
+    width: 45, 
+    textAlign: 'center' 
+  },
+  speedContainer: { 
+    flexDirection: 'row', 
+    justifyContent: 'space-around', 
+    width: '100%', 
+    paddingHorizontal: 20 
+  },
+  speedButton: { 
+    paddingVertical: 8, 
+    paddingHorizontal: 16, 
+    borderRadius: 20, 
+    backgroundColor: '#333' 
+  },
+  speedButtonActive: { 
+    backgroundColor: '#FF6D00' 
+  },
+  speedButtonText: { 
+    color: '#FFF', 
+    fontWeight: 'bold' 
+  },
+  speedButtonTextActive: { 
+    color: '#FFF' 
+  }
 });

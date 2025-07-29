@@ -13,11 +13,9 @@
 
 ---
 <div align="center">
-  **🙏 श्री कालभैरव स्तुति**
+  *🙏 श्री कालभैरव स्तुति*
 
-
-https://github.com/user-attachments/assets/60196a6d-5c81-4384-8972-12ab1d350b47
-
+<https://github.com/user-attachments/assets/60196a6d-5c81-4384-8972-12ab1d350b47>
 
 *॥ॐ क्रों कालभैरवाय नमः॥*
 
@@ -33,7 +31,7 @@ Traahi Maam Sharanagata Dehi Me Sharanam Sadaa*
 
 <div align="center">
 
-https://github.com/user-attachments/assets/6474d1b2-1ca8-49eb-9778-651d5dd0ac64
+<https://github.com/user-attachments/assets/6474d1b2-1ca8-49eb-9778-651d5dd0ac64>
 
 *Experience the divine journey through SadhnaFlow*
 

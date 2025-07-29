@@ -13,7 +13,7 @@
 
 ---
 <div align="center">
-  *🙏 श्री कालभैरव स्तुति*
+  🙏 श्री कालभैरव स्तुति
 
 <https://github.com/user-attachments/assets/60196a6d-5c81-4384-8972-12ab1d350b47>
 
@@ -25,7 +25,7 @@
 *Kaal Bhairav Kaal Bhairav Kaal Bhairav Paahi Maam  
 Traahi Maam Sharanagata Dehi Me Sharanam Sadaa*
 </div>
----
+
 
 ## 📱 Demo Video
 
@@ -39,7 +39,7 @@ Traahi Maam Sharanagata Dehi Me Sharanam Sadaa*
 
 </div>
 
----
+
 
 ## ✨ About SadhnaFlow
 
@@ -230,30 +230,6 @@ SadhnaFlow/
 ├── services/            # Storage and API services
 └── hooks/               # Custom React hooks
 ```
-
----
-
-## 🕉️ Sacred Mantras & Prayers
-
-### Bhairav Mantra
-
-**॥ ॐ भैरवाय नमः ॥**
-
-### Kaal Bhairav Mantra
-
-**॥ॐ क्रों कालभैरवाय नमः॥**
-
-### Bhairav Ashtakam
-
-*भैरवाष्टकं श्रीशंकराचार्यविरचितम्*
-
-### Daily Prayer
-
-*प्रातः स्मरामि भव भीति हरं सुरेशं*  
-*गंगाधरं गलगलत्फणि पन्नगेशम्*
-
----
-
 ## 🌸 Why Spiritual Practice Matters
 
 ### Mental Peace & Clarity
@@ -273,31 +249,11 @@ SadhnaFlow/
 - **Better Sleep**: Evening prayers and meditation improve sleep quality
 - **Reduced Blood Pressure**: Chanting mantras has proven cardiovascular benefits
 - **Enhanced Immunity**: Spiritual practices boost overall health and immunity
-
----
-
-## 🙏 Devotional Verses
-
-### Bhairav Chalisa Opening
-
-*जय गिरिजा पति दीन दयाला*  
-*सदा करत सन्तन प्रतिपाला*
-
-### Daily Salutation
-
-*कराग्रे वसते लक्ष्मी करमध्ये सरस्वती*  
-*करमूले तु गोविन्द प्रभाते करदर्शनम्*
-
-### Evening Prayer
-
-*कायेन वाचा मनसेन्द्रियैर्वा*  
-*बुद्ध्यात्मना वा प्रकृते स्वभावात्*
-
 ---
 
 ## 📱 Download & Usage
 
-1. **Install** the app on your Android/iOS device
+1. **Install** the app on your Android device
 2. **Set Daily Goals** for your spiritual practice
 3. **Use Japa Counter** for mantra chanting
 4. **Listen to Sacred Audio** during practice

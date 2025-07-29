@@ -35,6 +35,18 @@ const getJapaHistory = async (): Promise<JapaSession[]> => {
   }
 };
 
+// --- NEW: Function to delete a Japa session ---
+const deleteJapaSession = async (dateId: string): Promise<void> => {
+    try {
+        const history = await getJapaHistory();
+        const updatedHistory = history.filter(session => session.date !== dateId);
+        const jsonValue = JSON.stringify(updatedHistory);
+        await AsyncStorage.setItem(JAPA_HISTORY_KEY, jsonValue);
+    } catch (e) {
+        console.error("Error deleting japa session", e);
+    }
+};
+
 
 // --- NEW: Recitation Log Types and Functions ---
 export interface RecitationLog {
@@ -181,6 +193,7 @@ const deleteGoal = async (goalId: string): Promise<void> => {
 export const StorageService = {
   saveJapaSession,
   getJapaHistory,
+  deleteJapaSession,
   saveRecitationLog,
   getRecitationLogs,
   saveGratitudeNote,

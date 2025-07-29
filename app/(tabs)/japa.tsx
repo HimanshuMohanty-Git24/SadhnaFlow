@@ -7,9 +7,10 @@
  */
 import JapaCounter from '@/components/JapaCounter';
 import { JapaSession, StorageService } from '@/services/StorageService';
+import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from 'expo-router';
 import React, { useCallback, useState } from 'react';
-import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Alert, FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function JapaScreen() {
   const [history, setHistory] = useState<JapaSession[]>([]);
@@ -20,6 +21,24 @@ export default function JapaScreen() {
   };
 
   useFocusEffect(useCallback(() => { loadHistory(); }, []));
+
+  const handleDelete = (item: JapaSession) => {
+    Alert.alert(
+      "Delete Entry",
+      `Are you sure you want to delete the log of ${item.malas} mālā(s) from ${new Date(item.date).toLocaleDateString()}?`,
+      [
+        { text: "Cancel", style: "cancel" },
+        { 
+          text: "Delete", 
+          style: "destructive", 
+          onPress: async () => {
+            await StorageService.deleteJapaSession(item.date);
+            loadHistory(); // Refresh the list after deleting
+          }
+        },
+      ]
+    );
+  };
 
   return (
     <SafeAreaView style={japaScreenStyles.container}>
@@ -41,8 +60,13 @@ export default function JapaScreen() {
           } 
           renderItem={({ item }: { item: JapaSession }) => (
             <View style={japaScreenStyles.historyItem}>
-              <Text style={japaScreenStyles.historyText}>{item.malas} mālā(s)</Text>
-              <Text style={japaScreenStyles.historyDate}>{new Date(item.date).toLocaleDateString()}</Text>
+              <View>
+                <Text style={japaScreenStyles.historyText}>{item.malas} mālā(s)</Text>
+                <Text style={japaScreenStyles.historyDate}>{new Date(item.date).toLocaleDateString()}</Text>
+              </View>
+              <TouchableOpacity onPress={() => handleDelete(item)} style={japaScreenStyles.deleteButton}>
+                <Ionicons name="trash-bin-outline" size={22} color="#888" />
+              </TouchableOpacity>
             </View>
           )} 
         />
@@ -73,6 +97,7 @@ const japaScreenStyles = StyleSheet.create({
   historyItem: { 
     flexDirection: 'row', 
     justifyContent: 'space-between', 
+    alignItems: 'center',
     backgroundColor: '#1E1E1E', 
     padding: 15, 
     marginVertical: 4, 
@@ -86,6 +111,9 @@ const japaScreenStyles = StyleSheet.create({
   historyDate: { 
     color: '#A0A0A0', 
     fontSize: 14 
+  },
+  deleteButton: {
+    padding: 5, // Makes the touch area larger
   },
   // New container style to center the empty message
   emptyContainer: {

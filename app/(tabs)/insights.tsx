@@ -1,8 +1,8 @@
 /*
  * =================================================================
- * FILE: /app/(tabs)/insights.tsx
- * This is the final version with the notification functionality removed
- * to ensure stability in the Expo Go environment.
+ * FILE TO UPDATE: /app/(tabs)/insights.tsx
+ * This version fixes the bug by adding the missing UI section
+ * to display the recitation summary.
  * =================================================================
  */
 import { JapaSession, RecitationLog, StorageService } from '@/services/StorageService';
@@ -80,6 +80,21 @@ export default function InsightsScreen() {
                     <Text style={styles.metricLabel}>Total Mālās This Week</Text>
                 </View>
 
+                {/* THIS IS THE CORRECTED/ADDED SECTION */}
+                <View style={styles.card}>
+                    <Text style={styles.cardTitle}>Recitation Practice</Text>
+                    {Object.keys(recitationSummary).length > 0 ? (
+                        Object.entries(recitationSummary).map(([title, count]) => (
+                            <View key={title} style={styles.recitationRow}>
+                                <Text style={styles.recitationTitle}>{title}</Text>
+                                <Text style={styles.recitationCount}>{count} times</Text>
+                            </View>
+                        ))
+                    ) : (
+                        <Text style={styles.noDataText}>No recitations logged this week.</Text>
+                    )}
+                </View>
+
                 <View style={styles.card}>
                     <Text style={styles.cardTitle}>Achievements</Text>
                     <Achievement title="Sadhana Starter (7 day streak)" unlocked={streak >= 7} />
@@ -107,4 +122,9 @@ const styles = StyleSheet.create({
     achievement: { flexDirection: 'row', alignItems: 'center', paddingVertical: 8 },
     achievementTitle: { fontSize: 16, color: '#E0E0E0', marginLeft: 10 },
     achievementLocked: { color: '#555', fontStyle: 'italic' },
+    // Styles for the new recitation section
+    recitationRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 8 },
+    recitationTitle: { fontSize: 16, color: '#E0E0E0', flex: 1, marginRight: 10 },
+    recitationCount: { fontSize: 16, color: '#FFFFFF', fontWeight: 'bold' },
+    noDataText: { fontSize: 16, color: '#A0A0A0', textAlign: 'center', fontStyle: 'italic' },
 });

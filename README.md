@@ -28,21 +28,15 @@ Traahi Maam Sharanagata Dehi Me Sharanam Sadaa*
 ## 📱 Demo Video
 
 <div align="center">
-  <a href="./assets/video/Demo_Video.mp4">
-    <img src="./assets/images/icon.png" alt="Watch SadhnaFlow Demo" width="200" height="200">
-    <br>
-    <strong>🎥 Click to Watch Demo Video</strong>
+  <a href="https://youtube.com/shorts/2rO5KLsOC9s?feature=share">
+    <img src="https://img.youtube.com/vi/2rO5KLsOC9s/maxresdefault.jpg" alt="SadhnaFlow Demo Video" width="400">
   </a>
   
-  <br><br>
-  <em>Experience the divine journey through SadhnaFlow</em>
+  **🎥 [Watch Full Demo on YouTube](https://youtube.com/shorts/2rO5KLsOC9s?feature=share)**
   
-  <br><br>
-  <strong>📹 Demo Features:</strong>
-  <br>
-  ✨ Japa Counter in Action | 🎵 Sacred Audio Library | 🎯 Goal Setting
-  <br>
-  📖 Sacred Text Reading | 📊 Progress Tracking | ✍️ Spiritual Journal
+  *Experience the divine journey through SadhnaFlow*
+  
+  **📱 See in Action:** Japa Counter • Sacred Audio • Goal Tracking • Spiritual Journal
 </div>
 
 ---

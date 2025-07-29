@@ -1,7 +1,8 @@
 /*
  * =================================================================
  * FILE TO UPDATE: /components/JapaCounter.tsx
- * Fixed version using expo-av (more stable for bundled assets)
+ * The "Save & Reset" button logic has been updated as requested.
+ * For stability with the simple tick sound, this version uses expo-av.
  * =================================================================
  */
 import { StorageService } from '@/services/StorageService';
@@ -19,10 +20,8 @@ export default function JapaCounter({ onJapaSaved }: JapaCounterProps) {
   const [isFeedbackEnabled, setIsFeedbackEnabled] = useState(true);
   const tickSound = useRef<Audio.Sound | null>(null);
 
-  // Effect to load the tick sound effect
   useEffect(() => {
     let isMounted = true;
-
     const loadSound = async () => {
       try {
         if (isMounted) {
@@ -35,10 +34,8 @@ export default function JapaCounter({ onJapaSaved }: JapaCounterProps) {
         console.error("Failed to load tick sound:", error);
       }
     };
-
     loadSound();
 
-    // Cleanup function to unload the sound
     return () => {
       isMounted = false;
       tickSound.current?.unloadAsync();
@@ -47,14 +44,9 @@ export default function JapaCounter({ onJapaSaved }: JapaCounterProps) {
 
   const playFeedback = async () => {
     if (isFeedbackEnabled) {
-      // Trigger haptic feedback
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-      
-      // Play sound effect using expo-av
       try {
-        if (tickSound.current) {
-          await tickSound.current.replayAsync();
-        }
+        await tickSound.current?.replayAsync();
       } catch (error) {
         console.error("Failed to play tick sound", error);
       }
@@ -62,8 +54,7 @@ export default function JapaCounter({ onJapaSaved }: JapaCounterProps) {
   };
 
   const handlePress = () => {
-    playFeedback(); // Play feedback on every press
-
+    playFeedback();
     if (count === 107) {
       setCount(0);
       setMalas(prevMalas => prevMalas + 1);
@@ -73,10 +64,6 @@ export default function JapaCounter({ onJapaSaved }: JapaCounterProps) {
   };
 
   const saveAndReset = async (malasToSave: number) => {
-    if (malasToSave <= 0) {
-        Alert.alert("No Mālās", "There are no completed mālās to save.");
-        return;
-    }
     const session = { malas: malasToSave, date: new Date().toISOString() };
     await StorageService.saveJapaSession(session);
     setCount(0);
@@ -85,10 +72,21 @@ export default function JapaCounter({ onJapaSaved }: JapaCounterProps) {
   };
 
   const handleSave = () => {
-    Alert.alert("Confirm Save", `This will save your completed ${malas} mālā(s) and reset the counter. Continue?`, [
-      { text: "Cancel", style: "cancel" },
-      { text: "Save", onPress: () => saveAndReset(malas) },
-    ]);
+    // If user has completed mālās, prompt to save them.
+    if (malas > 0) {
+      Alert.alert("Confirm Save", `This will save your completed ${malas} mālā(s) and reset the counter. Continue?`, [
+        { text: "Cancel", style: "cancel" },
+        { text: "Save", onPress: () => saveAndReset(malas) },
+      ]);
+    } 
+    // If no mālās are complete, but there's a partial count, prompt to reset.
+    else if (count > 0) {
+      Alert.alert("Reset Progress?", "You have not completed a full mālā. Would you like to reset your current count to 0?", [
+        { text: "Cancel", style: "cancel" },
+        { text: "Reset", style: "destructive", onPress: () => setCount(0) },
+      ]);
+    }
+    // If both are 0, do nothing.
   };
 
   const handleLogOneMala = () => {
@@ -144,7 +142,7 @@ const styles = StyleSheet.create({
       top: 15,
       right: 15,
       padding: 5,
-      zIndex: 1, // Ensure it's tappable
+      zIndex: 1,
     },
     malaCount: { 
       fontSize: 32, 
@@ -171,5 +169,5 @@ const styles = StyleSheet.create({
     countText: { fontSize: 80, fontWeight: 'bold', color: '#FFFFFF' },
     buttonRow: { flexDirection: 'row', justifyContent: 'space-around', width: '100%', marginTop: 30 },
     actionButton: { backgroundColor: '#333333', paddingVertical: 12, paddingHorizontal: 20, borderRadius: 30 },
-    actionButtonText: { color: '#FFFFFF', fontSize: 16, fontWeight: '600' },
+    actionButtonText: { color: '#FFFFFF', fontSize: 16, fontWeight: 'bold' },
 });

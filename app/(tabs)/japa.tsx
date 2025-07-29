@@ -1,8 +1,8 @@
 /*
  * =================================================================
  * FILE TO UPDATE: /app/(tabs)/japa.tsx
- * The styles have been updated to use Flexbox to distribute space
- * vertically, ensuring the UI fills the screen on any device.
+ * The styles have been updated to correctly center the "No history yet"
+ * message when the list is empty, fixing the layout issue.
  * =================================================================
  */
 import JapaCounter from '@/components/JapaCounter';
@@ -23,18 +23,22 @@ export default function JapaScreen() {
 
   return (
     <SafeAreaView style={japaScreenStyles.container}>
-      {/* The JapaCounter is now wrapped in a view to control its layout */}
       <View style={japaScreenStyles.topContainer}>
         <JapaCounter onJapaSaved={loadHistory} />
       </View>
       
-      {/* The history section will now expand to fill the remaining space */}
       <View style={japaScreenStyles.bottomContainer}>
         <Text style={japaScreenStyles.historyTitle}>Recent Sādhanā</Text>
         <FlatList 
           data={history} 
-          keyExtractor={(item) => item.date} 
-          ListEmptyComponent={<Text style={japaScreenStyles.emptyText}>No history yet.</Text>} 
+          keyExtractor={(item) => item.date}
+          // This combination of styles ensures the empty message is centered
+          contentContainerStyle={{ flexGrow: 1 }}
+          ListEmptyComponent={
+            <View style={japaScreenStyles.emptyContainer}>
+              <Text style={japaScreenStyles.emptyText}>No history yet.</Text>
+            </View>
+          } 
           renderItem={({ item }: { item: JapaSession }) => (
             <View style={japaScreenStyles.historyItem}>
               <Text style={japaScreenStyles.historyText}>{item.malas} mālā(s)</Text>
@@ -48,20 +52,15 @@ export default function JapaScreen() {
 }
 
 const japaScreenStyles = StyleSheet.create({
-  // The main container now uses flex: 1 to take up the full screen height
   container: { 
     flex: 1, 
     backgroundColor: '#121212' 
   },
-  // This container holds the Japa counter at the top
   topContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingTop: 20, // Add some space from the top
+    // This container just holds the counter at the top
   },
-  // This container holds the history and is set to expand
   bottomContainer: {
-    flex: 1, // This is the key change: it makes the container grow
+    flex: 1, // This makes the history section expand
     marginTop: 20,
   },
   historyTitle: { 
@@ -88,9 +87,14 @@ const japaScreenStyles = StyleSheet.create({
     color: '#A0A0A0', 
     fontSize: 14 
   },
+  // New container style to center the empty message
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   emptyText: { 
-    textAlign: 'center', 
     color: '#A0A0A0', 
-    marginTop: 20 
+    fontStyle: 'italic',
   },
 });

@@ -28,12 +28,21 @@ Traahi Maam Sharanagata Dehi Me Sharanam Sadaa*
 ## 📱 Demo Video
 
 <div align="center">
-  <video width="300" controls>
-    <source src="./assets/video/Demo_Video.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+  <a href="./assets/video/Demo_Video.mp4">
+    <img src="./assets/images/icon.png" alt="Watch SadhnaFlow Demo" width="200" height="200">
+    <br>
+    <strong>🎥 Click to Watch Demo Video</strong>
+  </a>
   
-  *Experience the divine journey through SadhnaFlow*
+  <br><br>
+  <em>Experience the divine journey through SadhnaFlow</em>
+  
+  <br><br>
+  <strong>📹 Demo Features:</strong>
+  <br>
+  ✨ Japa Counter in Action | 🎵 Sacred Audio Library | 🎯 Goal Setting
+  <br>
+  📖 Sacred Text Reading | 📊 Progress Tracking | ✍️ Spiritual Journal
 </div>
 
 ---
@@ -119,17 +128,17 @@ In the tradition of Sanatan Dharma, regular spiritual practice is the pathway to
       </td>
       <td align="center">
         <img src="./assets/screenshots/2.jpeg" width="200" alt="Audio Library">
-        <br><em>Sacred Audio</em>
+        <br><em>Sacred Library</em>
       </td>
     </tr>
     <tr>
       <td align="center">
         <img src="./assets/screenshots/3.jpeg" width="200" alt="Goals">
-        <br><em>Spiritual Goals</em>
+        <br><em>Sacred Text</em>
       </td>
       <td align="center">
         <img src="./assets/screenshots/4.jpeg" width="200" alt="Library">
-        <br><em>Sacred Library</em>
+        <br><em>Log Recitation</em>
       </td>
       <td align="center">
         <img src="./assets/screenshots/5.jpeg" width="200" alt="Insights">
@@ -139,11 +148,11 @@ In the tradition of Sanatan Dharma, regular spiritual practice is the pathway to
     <tr>
       <td align="center">
         <img src="./assets/screenshots/6.jpeg" width="200" alt="Journal">
-        <br><em>Spiritual Journal</em>
+        <br><em>Spiritual Goals</em>
       </td>
       <td align="center">
         <img src="./assets/screenshots/7.jpeg" width="200" alt="Settings">
-        <br><em>Divine Settings</em>
+        <br><em>Spiritual Journal</em>
       </td>
     </tr>
   </table>

@@ -29,9 +29,9 @@ Traahi Maam Sharanagata Dehi Me Sharanam Sadaa*
 
 <div align="center">
 
-[![SadhnaFlow Demo - Sacred Digital Companion](https://img.youtube.com/vi/2rO5KLsOC9s/0.jpg)](https://youtube.com/shorts/2rO5KLsOC9s?feature=share)
+[![SadhnaFlow Demo - Sacred Digital Companion](./assets/images/icon.png)](./assets/video/Demo_Video.mp4)
 
-**🎥 Click above to watch the full demo on YouTube**
+**🎥 Click above to watch the demo video**
 
 *Experience the divine journey through SadhnaFlow*
 

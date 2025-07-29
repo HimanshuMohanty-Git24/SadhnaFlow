@@ -12,8 +12,12 @@
 </div>
 
 ---
+<div align="center">
+  **🙏 श्री कालभैरव स्तुति**
 
-## 🙏 श्री कालभैरव स्तुति
+
+https://github.com/user-attachments/assets/60196a6d-5c81-4384-8972-12ab1d350b47
+
 
 **॥ॐ क्रों कालभैरवाय नमः॥**
 
@@ -22,16 +26,14 @@
 
 *Kaal Bhairav Kaal Bhairav Kaal Bhairav Paahi Maam  
 Traahi Maam Sharanagata Dehi Me Sharanam Sadaa*
-
+</div>
 ---
 
 ## 📱 Demo Video
 
 <div align="center">
 
-[![SadhnaFlow Demo - Sacred Digital Companion](./assets/images/icon.png)](./assets/video/Demo_Video.mp4)
-
-**🎥 Click above to watch the demo video**
+https://github.com/user-attachments/assets/6474d1b2-1ca8-49eb-9778-651d5dd0ac64
 
 *Experience the divine journey through SadhnaFlow*
 
@@ -147,6 +149,10 @@ In the tradition of Sanatan Dharma, regular spiritual practice is the pathway to
       <td align="center">
         <img src="./assets/screenshots/7.jpeg" width="200" alt="Settings">
         <br><em>Spiritual Journal</em>
+      </td>
+      <td align="center">
+        <img src="./assets/images/splash-icon.png" width="200" alt="Settings">
+        <br><em>Intro Screen</em>
       </td>
     </tr>
   </table>

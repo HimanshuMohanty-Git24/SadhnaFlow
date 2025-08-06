@@ -153,8 +153,8 @@ In the tradition of Sanatan Dharma, regular spiritual practice is the pathway to
         <br><em>Spiritual Journal</em>
       </td>
       <td align="center">
-        <img src="./assets/images/splash-icon.png" width="200" alt="Settings">
-        <br><em>Intro Screen</em>
+        <img src="./assets/screenshots/8.jpeg" width="200" alt="Settings">
+        <br><em>Divine Vigraha</em>
       </td>
     </tr>
   </table>
@@ -329,3 +329,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
   
   *Version 1.0.0 | Built with React Native & Expo*
 </div>
+

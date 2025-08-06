@@ -6,24 +6,14 @@
  * =================================================================
  */
 import { JapaSession, RecitationLog, StorageService } from '@/services/StorageService';
-import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from 'expo-router';
 import React, { useCallback, useState } from 'react';
 import { Platform, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
 
-const Achievement = ({ title, unlocked }: { title: string, unlocked: boolean }) => (
-    <View style={styles.achievement}>
-        <Ionicons name={unlocked ? "trophy" : "lock-closed"} size={24} color={unlocked ? "#FFD700" : "#555"} />
-        <Text style={[styles.achievementTitle, !unlocked && styles.achievementLocked]}>{title}</Text>
-    </View>
-);
-
 export default function InsightsScreen() {
     const [totalMalas, setTotalMalas] = useState(0);
     const [recitationSummary, setRecitationSummary] = useState<{[key: string]: number}>({});
-    const [practiceDays, setPracticeDays] = useState(0);
     const [streak, setStreak] = useState(0);
-    const [totalJapa, setTotalJapa] = useState(0);
 
     const calculateInsights = async () => {
         const oneWeekAgo = new Date();
@@ -41,12 +31,6 @@ export default function InsightsScreen() {
         const summary: {[key: string]: number} = {};
         weeklyRecitations.forEach(log => { summary[log.stotraTitle] = (summary[log.stotraTitle] || 0) + log.count; });
         setRecitationSummary(summary);
-        
-        const practiceDates = new Set([...weeklyJapa.map(j => new Date(j.date).toISOString().split('T')[0]), ...weeklyRecitations.map(r => new Date(r.date).toISOString().split('T')[0])]);
-        setPracticeDays(practiceDates.size);
-
-        // All-Time Calculations for Achievements
-        setTotalJapa(japaHistory.reduce((sum, item) => sum + item.malas, 0));
         
         // Streak Calculation
         const allPracticeDates = new Set(japaHistory.map(j => new Date(j.date).toISOString().split('T')[0]));
@@ -82,7 +66,7 @@ export default function InsightsScreen() {
                 <View style={styles.card}>
                     <Text style={styles.cardTitle}>Japa Practice</Text>
                     <Text style={styles.metric}>{totalMalas}</Text>
-                    <Text style={styles.metricLabel}>Total Mālās This Week</Text>
+                    <Text style={styles.metricLabel}>Total Mālās Recited</Text>
                 </View>
 
                 {/* THIS IS THE CORRECTED/ADDED SECTION */}
@@ -98,12 +82,6 @@ export default function InsightsScreen() {
                     ) : (
                         <Text style={styles.noDataText}>No recitations logged this week.</Text>
                     )}
-                </View>
-
-                <View style={styles.card}>
-                    <Text style={styles.cardTitle}>Achievements</Text>
-                    <Achievement title="Sadhana Starter (7 day streak)" unlocked={streak >= 7} />
-                    <Achievement title="Mala Master (108 total malas)" unlocked={totalJapa >= 108} />
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -128,9 +106,6 @@ const styles = StyleSheet.create({
     cardTitle: { fontSize: 22, fontWeight: '600', color: '#FF6D00', marginBottom: 15 },
     metric: { fontSize: 48, fontWeight: 'bold', color: '#FFFFFF', textAlign: 'center' },
     metricLabel: { fontSize: 16, color: '#A0A0A0', textAlign: 'center', marginTop: 5 },
-    achievement: { flexDirection: 'row', alignItems: 'center', paddingVertical: 8 },
-    achievementTitle: { fontSize: 16, color: '#E0E0E0', marginLeft: 10 },
-    achievementLocked: { color: '#555', fontStyle: 'italic' },
     // Styles for the new recitation section
     recitationRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 8 },
     recitationTitle: { fontSize: 16, color: '#E0E0E0', flex: 1, marginRight: 10 },

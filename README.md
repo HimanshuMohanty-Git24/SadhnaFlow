@@ -88,14 +88,14 @@ In the tradition of Sanatan Dharma, regular spiritual practice is the pathway to
 - Sanskrit with transliteration
 - Meaning and significance explanations
 
-### �️ Vigraha (Divine Form)
+### 🕉️Vigraha (Divine Form)
 
 - Sacred images of Lord Bhairav for meditation
 - Multiple divine forms for visual contemplation
 - Sadhana instructions for spiritual practice
 - Interactive gallery with detailed descriptions
 
-### �📊 Insights & Analytics
+### 📊Insights & Analytics
 
 - Spiritual practice trends
 - Consistency tracking

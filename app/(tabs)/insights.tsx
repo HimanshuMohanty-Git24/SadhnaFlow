@@ -9,7 +9,7 @@ import { JapaSession, RecitationLog, StorageService } from '@/services/StorageSe
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from 'expo-router';
 import React, { useCallback, useState } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Platform, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
 
 const Achievement = ({ title, unlocked }: { title: string, unlocked: boolean }) => (
     <View style={styles.achievement}>
@@ -63,6 +63,11 @@ export default function InsightsScreen() {
 
     return (
         <SafeAreaView style={styles.container}>
+            <StatusBar 
+                barStyle="light-content" 
+                backgroundColor="#121212" 
+                translucent={false}
+            />
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <View style={styles.headerContainer}>
                     <Text style={styles.header}>Weekly Insights</Text>
@@ -106,7 +111,11 @@ export default function InsightsScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: '#121212' },
+    container: { 
+        flex: 1, 
+        backgroundColor: '#121212',
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+    },
     scrollContainer: { padding: 20 },
     headerContainer: { 
         flexDirection: 'row', 

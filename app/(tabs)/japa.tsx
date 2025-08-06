@@ -10,7 +10,7 @@ import { JapaSession, StorageService } from '@/services/StorageService';
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from 'expo-router';
 import React, { useCallback, useState } from 'react';
-import { Alert, FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, FlatList, Platform, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function JapaScreen() {
   const [history, setHistory] = useState<JapaSession[]>([]);
@@ -42,6 +42,11 @@ export default function JapaScreen() {
 
   return (
     <SafeAreaView style={japaScreenStyles.container}>
+      <StatusBar 
+        barStyle="light-content" 
+        backgroundColor="#121212" 
+        translucent={false}
+      />
       <View style={japaScreenStyles.topContainer}>
         <JapaCounter onJapaSaved={loadHistory} />
       </View>
@@ -78,7 +83,8 @@ export default function JapaScreen() {
 const japaScreenStyles = StyleSheet.create({
   container: { 
     flex: 1, 
-    backgroundColor: '#121212' 
+    backgroundColor: '#121212',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   topContainer: {
     // This container just holds the counter at the top

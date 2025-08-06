@@ -7,7 +7,7 @@
 import { GratitudeNote, StorageService } from '@/services/StorageService';
 import { useFocusEffect } from 'expo-router';
 import React, { useCallback, useState } from 'react';
-import { FlatList, Keyboard, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { FlatList, Keyboard, Platform, SafeAreaView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function JournalScreen() {
     const [note, setNote] = useState('');
@@ -39,6 +39,11 @@ export default function JournalScreen() {
 
     return (
         <SafeAreaView style={journalStyles.container}>
+            <StatusBar 
+                barStyle="light-content" 
+                backgroundColor="#121212" 
+                translucent={false}
+            />
             <Text style={journalStyles.header}>Gratitude Journal</Text>
             <Text style={journalStyles.prompt}>What are you grateful for today?</Text>
             <TextInput
@@ -69,7 +74,12 @@ export default function JournalScreen() {
 }
 
 const journalStyles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: '#121212', padding: 20 },
+    container: { 
+        flex: 1, 
+        backgroundColor: '#121212', 
+        padding: 20,
+        paddingTop: Platform.OS === 'android' ? (StatusBar.currentHeight || 0) + 20 : 20,
+    },
     header: { fontSize: 28, fontWeight: 'bold', color: '#FFFFFF', textAlign: 'center', marginBottom: 10 },
     prompt: { fontSize: 16, color: '#A0A0A0', textAlign: 'center', marginBottom: 20 },
     input: {

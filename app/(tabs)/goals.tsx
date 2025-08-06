@@ -9,7 +9,7 @@ import { Goal, StorageService } from '@/services/StorageService';
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from 'expo-router';
 import React, { useCallback, useState } from 'react';
-import { Alert, FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, FlatList, Platform, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const GoalItem = ({ item, onToggle, onDelete }: { item: Goal, onToggle: (id: string, status: boolean) => void, onDelete: (id: string) => void }) => (
     <View style={goalStyles.goalItem}>
@@ -61,6 +61,11 @@ export default function GoalsScreen() {
 
     return (
         <SafeAreaView style={goalStyles.container}>
+            <StatusBar 
+                barStyle="light-content" 
+                backgroundColor="#121212" 
+                translucent={false}
+            />
             <AddGoalModal visible={modalVisible} onClose={() => setModalVisible(false)} onSave={handleSaveGoal} />
             <View style={goalStyles.header}>
                 <Text style={goalStyles.headerTitle}>My Saṅkalpas</Text>
@@ -89,7 +94,12 @@ export default function GoalsScreen() {
 }
 
 const goalStyles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: '#121212', padding: 20 },
+    container: { 
+        flex: 1, 
+        backgroundColor: '#121212', 
+        padding: 20,
+        paddingTop: Platform.OS === 'android' ? (StatusBar.currentHeight || 0) + 20 : 20,
+    },
     header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 },
     headerTitle: { fontSize: 28, fontWeight: 'bold', color: '#FFFFFF' },
     sectionTitle: { fontSize: 22, fontWeight: '600', color: '#FF6D00', marginTop: 20, marginBottom: 10, borderBottomColor: '#333', borderBottomWidth: 1, paddingBottom: 5 },

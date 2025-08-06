@@ -8,7 +8,7 @@
 import { STOTRAS, Stotra } from '@/data/stotras';
 import { Link } from 'expo-router';
 import React from 'react';
-import { FlatList, Platform, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { FlatList, Platform, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function LibraryScreen() {
   return (
@@ -18,6 +18,17 @@ export default function LibraryScreen() {
         backgroundColor="#121212" 
         translucent={false}
       />
+      
+      {/* Bhairav Vigraha Section */}
+      <View style={libStyles.specialSection}>
+        <Link href="/vigraha" asChild>
+          <TouchableOpacity style={libStyles.vigrahaItem}>
+            <Text style={libStyles.vigrahaTitle}>🕉️ Bhairav Vigraha</Text>
+            <Text style={libStyles.vigrahaSubtitle}>Divine Form for Sadhana</Text>
+          </TouchableOpacity>
+        </Link>
+      </View>
+
       <FlatList 
         data={STOTRAS} 
         keyExtractor={(item) => item.id} 
@@ -41,6 +52,32 @@ const libStyles = StyleSheet.create({
     flex: 1, 
     backgroundColor: '#121212',
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, // Add padding for Android status bar
+  },
+  // Special section for Bhairav Vigraha
+  specialSection: {
+    paddingHorizontal: 16,
+    paddingTop: 20,
+    paddingBottom: 10,
+  },
+  vigrahaItem: {
+    backgroundColor: '#8B4513',
+    padding: 20,
+    borderRadius: 15,
+    alignItems: 'center',
+    marginBottom: 10,
+    borderWidth: 2,
+    borderColor: '#FFD700',
+  },
+  vigrahaTitle: {
+    fontSize: 22,
+    color: '#FFD700',
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  vigrahaSubtitle: {
+    fontSize: 14,
+    color: '#FFFFFF',
+    opacity: 0.9,
   },
   // This style applies to the content within the list itself
   listContentContainer: {

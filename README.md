@@ -26,7 +26,6 @@
 Traahi Maam Sharanagata Dehi Me Sharanam Sadaa*
 </div>
 
-
 ## 📱 Demo Video
 
 <div align="center">
@@ -38,8 +37,6 @@ Traahi Maam Sharanagata Dehi Me Sharanam Sadaa*
 **📱 See in Action:** Japa Counter • Sacred Audio • Goal Tracking • Spiritual Journal
 
 </div>
-
-
 
 ## ✨ About SadhnaFlow
 
@@ -91,7 +88,14 @@ In the tradition of Sanatan Dharma, regular spiritual practice is the pathway to
 - Sanskrit with transliteration
 - Meaning and significance explanations
 
-### 📊 Insights & Analytics
+### �️ Vigraha (Divine Form)
+
+- Sacred images of Lord Bhairav for meditation
+- Multiple divine forms for visual contemplation
+- Sadhana instructions for spiritual practice
+- Interactive gallery with detailed descriptions
+
+### �📊 Insights & Analytics
 
 - Spiritual practice trends
 - Consistency tracking
@@ -217,19 +221,31 @@ SadhnaFlow/
 │   │   ├── japa.tsx       # Japa counter
 │   │   ├── goals.tsx      # Spiritual goals
 │   │   ├── library.tsx    # Sacred library
+│   │   ├── vigraha.tsx    # Divine form gallery
 │   │   ├── insights.tsx   # Analytics
 │   │   └── journal.tsx    # Spiritual journal
 │   └── stotra/            # Individual stotra pages
 ├── components/            # Reusable components
+│   ├── AddGoalModal.tsx   # Goal creation modal
+│   ├── AudioPlayer.tsx    # Audio playback component
+│   ├── CustomSlider.tsx   # Custom UI slider
+│   ├── JapaCounter.tsx    # Digital mala counter
+│   └── RecitationLogger.tsx # Log spiritual sessions
 ├── assets/               # Static assets
 │   ├── audio/           # Sacred audio files
-│   ├── images/          # Icons and images
+│   ├── images/          # Icons and divine images
+│   │   ├── Batuka_Bhairav.jpg # Divine form images
+│   │   └── Kal_Bhairav.jpg    # Sacred iconography
 │   ├── screenshots/     # App screenshots
 │   └── video/           # Demo video
 ├── data/                # Spiritual content data
+│   └── stotras.ts       # Sacred text database
 ├── services/            # Storage and API services
+│   └── StorageService.ts # Local data management
 └── hooks/               # Custom React hooks
+    └── useAudioPlayer.ts # Audio playback hook
 ```
+
 ## 🌸 Why Spiritual Practice Matters
 
 ### Mental Peace & Clarity
@@ -249,6 +265,7 @@ SadhnaFlow/
 - **Better Sleep**: Evening prayers and meditation improve sleep quality
 - **Reduced Blood Pressure**: Chanting mantras has proven cardiovascular benefits
 - **Enhanced Immunity**: Spiritual practices boost overall health and immunity
+
 ---
 
 ## 📱 Download & Usage
@@ -257,8 +274,9 @@ SadhnaFlow/
 2. **Set Daily Goals** for your spiritual practice
 3. **Use Japa Counter** for mantra chanting
 4. **Listen to Sacred Audio** during practice
-5. **Track Progress** through insights
-6. **Maintain** a spiritual journal
+5. **View Divine Forms** in Vigraha for meditation
+6. **Track Progress** through insights
+7. **Maintain** a spiritual journal
 
 ---
 

@@ -5,9 +5,10 @@
  * =================================================================
  */
 import { GratitudeNote, StorageService } from '@/services/StorageService';
+import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from 'expo-router';
 import React, { useCallback, useState } from 'react';
-import { FlatList, Keyboard, Platform, SafeAreaView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, FlatList, Keyboard, Platform, SafeAreaView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function JournalScreen() {
     const [note, setNote] = useState('');
@@ -15,10 +16,6 @@ export default function JournalScreen() {
 
     const loadNotes = async () => {
         const allNotes = await StorageService.getGratitudeNotes();
-        const today = new Date().toISOString().split('T')[0];
-        const todaysNote = allNotes.find(n => n.date.startsWith(today));
-        
-        setNote(todaysNote?.note || '');
         setPastNotes(allNotes);
     };
 
@@ -33,8 +30,27 @@ export default function JournalScreen() {
             date: new Date().toISOString(),
         };
         await StorageService.saveGratitudeNote(newNote);
+        setNote(''); // Clear the input after saving
         Keyboard.dismiss();
         await loadNotes(); // Reload to show the updated list
+    };
+
+    const handleDelete = async (noteDate: string) => {
+        Alert.alert(
+            "Delete Note",
+            "Are you sure you want to delete this gratitude note?",
+            [
+                { text: "Cancel", style: "cancel" },
+                { 
+                    text: "Delete", 
+                    style: "destructive", 
+                    onPress: async () => {
+                        await StorageService.deleteGratitudeNote(noteDate);
+                        await loadNotes(); // Reload to show the updated list
+                    }
+                },
+            ]
+        );
     };
 
     return (
@@ -64,7 +80,15 @@ export default function JournalScreen() {
                 keyExtractor={(item) => item.date}
                 renderItem={({ item }) => (
                     <View style={journalStyles.noteCard}>
-                        <Text style={journalStyles.noteDate}>{new Date(item.date).toLocaleDateString()}</Text>
+                        <View style={journalStyles.noteHeader}>
+                            <Text style={journalStyles.noteDate}>{new Date(item.date).toLocaleDateString()}</Text>
+                            <TouchableOpacity 
+                                style={journalStyles.deleteButton}
+                                onPress={() => handleDelete(item.date)}
+                            >
+                                <Ionicons name="trash-bin-outline" size={20} color="#FF4444" />
+                            </TouchableOpacity>
+                        </View>
                         <Text style={journalStyles.noteText}>{item.note}</Text>
                     </View>
                 )}
@@ -95,6 +119,8 @@ const journalStyles = StyleSheet.create({
     saveButtonText: { color: '#FFFFFF', fontSize: 16, fontWeight: 'bold' },
     historyHeader: { fontSize: 22, fontWeight: 'bold', color: '#FFFFFF', marginTop: 10, marginBottom: 10, borderTopColor: '#333', borderTopWidth: 1, paddingTop: 20 },
     noteCard: { backgroundColor: '#1E1E1E', borderRadius: 10, padding: 15, marginBottom: 10 },
-    noteDate: { color: '#A0A0A0', fontSize: 12, marginBottom: 5 },
+    noteHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 5 },
+    noteDate: { color: '#A0A0A0', fontSize: 12 },
+    deleteButton: { padding: 5 },
     noteText: { color: '#E0E0E0', fontSize: 16 },
 });

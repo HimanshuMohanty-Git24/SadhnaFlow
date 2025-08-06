@@ -113,16 +113,8 @@ const GOALS_KEY = 'goals_list';
 const saveGratitudeNote = async (note: GratitudeNote): Promise<void> => {
     try {
         const notes = await getGratitudeNotes();
-        const today = new Date().toISOString().split('T')[0];
-        const existingNoteIndex = notes.findIndex((item) => item.date.startsWith(today));
-
-        if (existingNoteIndex > -1) {
-            // Update today's note
-            notes[existingNoteIndex].note = note.note;
-        } else {
-            // Add a new note for today
-            notes.unshift(note);
-        }
+        // Always add as a new note entry, don't check for existing dates
+        notes.unshift(note);
         
         const jsonValue = JSON.stringify(notes);
         await AsyncStorage.setItem(GRATITUDE_NOTES_KEY, jsonValue);
@@ -138,6 +130,17 @@ const getGratitudeNotes = async (): Promise<GratitudeNote[]> => {
     } catch (e) {
         console.error("Error fetching gratitude notes", e);
         return [];
+    }
+};
+
+const deleteGratitudeNote = async (noteDate: string): Promise<void> => {
+    try {
+        const notes = await getGratitudeNotes();
+        const updatedNotes = notes.filter(note => note.date !== noteDate);
+        const jsonValue = JSON.stringify(updatedNotes);
+        await AsyncStorage.setItem(GRATITUDE_NOTES_KEY, jsonValue);
+    } catch (e) {
+        console.error("Error deleting gratitude note", e);
     }
 };
 
@@ -198,6 +201,7 @@ export const StorageService = {
   getRecitationLogs,
   saveGratitudeNote,
   getGratitudeNotes,
+  deleteGratitudeNote,
   getGoals,
   saveGoal,
   updateGoalStatus,

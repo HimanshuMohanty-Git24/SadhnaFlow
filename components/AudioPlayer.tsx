@@ -1,14 +1,14 @@
 /*
  * =================================================================
  * FILE TO UPDATE: /components/AudioPlayer.tsx
- * Fixed version with proper seekTo handling and coordinate mapping
+ * Using community slider for reliability
  * =================================================================
  */
 import { Ionicons } from '@expo/vector-icons';
-import { AudioPlayer as PlayerInstance } from 'expo-audio'; // Type for the player
-import React, { useState } from 'react';
+import Slider from '@react-native-community/slider';
+import { AudioPlayer as PlayerInstance } from 'expo-audio';
+import React, { useCallback, useState } from 'react';
 import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import CustomSlider from './CustomSlider';
 
 type AudioPlayerProps = {
   player: PlayerInstance | null;
@@ -25,9 +25,10 @@ const formatTime = (millis: number | null) => {
 
 export default function AudioPlayer({ player, status }: AudioPlayerProps) {
   const [wasPlayingBeforeSeek, setWasPlayingBeforeSeek] = useState(false);
+  const [isChangingRate, setIsChangingRate] = useState(false);
 
-  const togglePlayback = () => {
-    if (!player) return;
+  const togglePlayback = useCallback(() => {
+    if (!player || isChangingRate) return;
     try {
       if (status?.playing) {
         player.pause();
@@ -37,18 +38,34 @@ export default function AudioPlayer({ player, status }: AudioPlayerProps) {
     } catch (error) {
       console.log('Audio player operation failed - player may have been released');
     }
-  };
+  }, [player, status?.playing, isChangingRate]);
 
-  const changeRate = (rate: number) => {
-    if (!player) return;
+  const changeRate = useCallback(async (rate: number) => {
+    if (!player || isChangingRate) return;
+    
+    setIsChangingRate(true);
+    const wasPlaying = status?.playing || false;
+    
     try {
-      player.setPlaybackRate(rate);
+      if (wasPlaying) {
+        await player.pause();
+      }
+      
+      await new Promise(resolve => setTimeout(resolve, 50));
+      await player.setPlaybackRate(rate);
+      
+      if (wasPlaying) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+        await player.play();
+      }
     } catch (error) {
-      console.log('Failed to change playback rate - player may have been released');
+      console.log('Failed to change playback rate:', error);
+    } finally {
+      setIsChangingRate(false);
     }
-  };
+  }, [player, status?.playing, isChangingRate]);
 
-  const handleSeekStart = () => {
+  const handleSeekStart = useCallback(() => {
     if (!player) return;
     try {
       setWasPlayingBeforeSeek(status?.playing || false);
@@ -56,58 +73,51 @@ export default function AudioPlayer({ player, status }: AudioPlayerProps) {
         player.pause();
       }
     } catch (error) {
-      console.log('Failed to pause for seeking - player may have been released');
+      console.log('Failed to pause for seeking');
     }
-  };
+  }, [player, status?.playing]);
 
-  const handleSeekComplete = (positionMillis: number) => {
+  const handleSeekComplete = useCallback(async (positionSeconds: number) => {
     if (!player) return;
     try {
-      // FIXED: expo-audio seekTo actually takes milliseconds, not seconds
-      // Convert to seconds since the API expects seconds
-      player.seekTo(positionMillis / 1000);
+      await player.seekTo(Math.max(0, positionSeconds));
       
       if (wasPlayingBeforeSeek) {
-        // Small delay to ensure seek completes before resuming playback
-        setTimeout(() => {
+        setTimeout(async () => {
           try {
-            player.play();
+            await player.play();
           } catch (error) {
             console.log('Failed to resume playback after seek');
           }
-        }, 100);
+        }, 150);
       }
     } catch (error) {
-      console.log('Failed to seek - player may have been released');
+      console.log('Failed to seek');
     }
-  };
-
-  const handleValueChange = (positionMillis: number) => {
-    // Optional: You can provide real-time feedback during dragging
-    // This is called continuously while dragging
-    // For performance, you might want to throttle this or skip it
-  };
+  }, [player, wasPlayingBeforeSeek]);
 
   const playbackRates = [1.0, 1.25, 1.5, 2.0];
   const isLoading = !status?.isLoaded;
   const isPlaying = status?.playing || false;
   
-  // Convert current time from seconds to milliseconds for the slider
-  const positionMillis = (status?.currentTime || 0) * 1000;
-  const durationMillis = status?.duration ? status.duration * 1000 : null;
+  // Use seconds for the community slider
+  const positionSeconds = status?.currentTime || 0;
+  const durationSeconds = status?.duration || 0;
   const playbackRate = player?.playbackRate ?? 1.0;
 
-  // Don't render slider if we don't have duration yet
-  const shouldShowSlider = durationMillis && durationMillis > 0;
+  const shouldShowSlider = durationSeconds && durationSeconds > 0;
 
   return (
     <View style={audioStyles.container}>
       <TouchableOpacity 
-        style={audioStyles.playButton} 
+        style={[
+          audioStyles.playButton,
+          (isLoading || isChangingRate) && audioStyles.playButtonDisabled
+        ]} 
         onPress={togglePlayback} 
-        disabled={isLoading}
+        disabled={isLoading || isChangingRate}
       >
-        {isLoading ? (
+        {isLoading || isChangingRate ? (
           <ActivityIndicator size="large" color="#FFFFFF" />
         ) : (
           <Ionicons 
@@ -120,29 +130,28 @@ export default function AudioPlayer({ player, status }: AudioPlayerProps) {
 
       <View style={audioStyles.progressContainer}>
         <Text style={audioStyles.timeText}>
-          {formatTime(positionMillis)}
+          {formatTime(positionSeconds * 1000)}
         </Text>
         
         {shouldShowSlider ? (
-          <CustomSlider
+          <Slider
             style={audioStyles.slider}
             minimumValue={0}
-            maximumValue={durationMillis}
-            value={positionMillis}
+            maximumValue={durationSeconds}
+            value={positionSeconds}
             onSlidingStart={handleSeekStart}
-            onValueChange={handleValueChange}
             onSlidingComplete={handleSeekComplete}
             minimumTrackTintColor="#FF6D00"
             maximumTrackTintColor="#555"
             thumbTintColor="#FF6D00"
-            disabled={isLoading}
+            disabled={isLoading || isChangingRate}
           />
         ) : (
           <View style={audioStyles.slider} />
         )}
         
         <Text style={audioStyles.timeText}>
-          {formatTime(durationMillis)}
+          {formatTime(durationSeconds * 1000)}
         </Text>
       </View>
 
@@ -153,13 +162,16 @@ export default function AudioPlayer({ player, status }: AudioPlayerProps) {
             onPress={() => changeRate(rate)} 
             style={[
               audioStyles.speedButton, 
-              playbackRate === rate && audioStyles.speedButtonActive
+              playbackRate === rate && audioStyles.speedButtonActive,
+              isChangingRate && audioStyles.speedButtonDisabled
             ]}
+            disabled={isChangingRate}
           >
             <Text 
               style={[
                 audioStyles.speedButtonText, 
-                playbackRate === rate && audioStyles.speedButtonTextActive
+                playbackRate === rate && audioStyles.speedButtonTextActive,
+                isChangingRate && audioStyles.speedButtonTextDisabled
               ]}
             >
               {rate}x
@@ -188,6 +200,9 @@ const audioStyles = StyleSheet.create({
     justifyContent: 'center', 
     marginBottom: 20 
   },
+  playButtonDisabled: {
+    backgroundColor: '#FF6D00AA',
+  },
   progressContainer: { 
     width: '100%', 
     flexDirection: 'row', 
@@ -198,7 +213,7 @@ const audioStyles = StyleSheet.create({
   slider: { 
     flex: 1, 
     marginHorizontal: 10,
-    height: 40, // Ensure enough touch area
+    height: 40,
   },
   timeText: { 
     color: '#AAA', 
@@ -210,22 +225,30 @@ const audioStyles = StyleSheet.create({
     flexDirection: 'row', 
     justifyContent: 'space-around', 
     width: '100%', 
-    paddingHorizontal: 20 
+    paddingHorizontal: 20,
   },
   speedButton: { 
     paddingVertical: 8, 
     paddingHorizontal: 16, 
     borderRadius: 20, 
-    backgroundColor: '#333' 
+    backgroundColor: '#333',
+    marginHorizontal: 4,
   },
   speedButtonActive: { 
     backgroundColor: '#FF6D00' 
   },
+  speedButtonDisabled: {
+    backgroundColor: '#333333AA',
+  },
   speedButtonText: { 
     color: '#FFF', 
-    fontWeight: 'bold' 
+    fontWeight: 'bold',
+    fontSize: 14
   },
   speedButtonTextActive: { 
     color: '#FFF' 
+  },
+  speedButtonTextDisabled: {
+    color: '#FFFFFF66',
   }
 });

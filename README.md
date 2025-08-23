@@ -1,4 +1,4 @@
-🕉️ SadhnaFlow - Digital Sadhana Companion
+# 🕉️ SadhnaFlow - Digital Sadhana Companion
 <div align="center">
 <img src="./assets/images/icon.png" alt="SadhnaFlow Logo" width="120" height="120">
 
@@ -29,7 +29,12 @@ Traahi Maam Sharanagata Dehi Me Sharanam Sadaa
 📱 Demo Video
 <div align="center">
 
-<https://github.com/user-attachments/assets/6474d1b2-1ca8-49eb-9778-651d5dd0ac64>
+
+
+
+https://github.com/user-attachments/assets/20366221-f6dd-43a0-93df-4aff99f58183
+
+
 
 Experience the divine journey through SadhnaFlow
 
@@ -262,3 +267,4 @@ May this digital companion guide you on your spiritual journey
 Made with 🕉️ and ❤️ for the spiritual community
 
 </div>
+

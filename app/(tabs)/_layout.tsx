@@ -1,9 +1,3 @@
-/*
- * =================================================================
- * FILE TO UPDATE: /app/(tabs)/_layout.tsx
- * Adding the new "Goals" tab to the navigation bar.
- * =================================================================
- */
 import { FontAwesome, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import React from 'react';
@@ -78,6 +72,15 @@ export default function TabLayout() {
           title: 'Journal',
           tabBarIcon: ({ color, focused }) => (
             <Ionicons name={focused ? 'create' : 'create-outline'} size={28} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: 'Settings',
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons name={focused ? 'settings' : 'settings-outline'} size={28} color={color} />
           ),
         }}
       />

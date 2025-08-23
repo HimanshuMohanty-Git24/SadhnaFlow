@@ -224,11 +224,21 @@ const importAllData = async (data: any): Promise<void> => {
     }
 };
 
+// --- NEW: Wipe All Data Function ---
+const wipeAllData = async (): Promise<void> => {
+    try {
+        const keys = Object.values(ALL_KEYS);
+        await AsyncStorage.multiRemove(keys);
+    } catch (e) {
+        console.error("Error wiping all data", e);
+    }
+};
+
 // --- Export all functions ---
 export const StorageService = {
   saveJapaSession, getJapaHistory, deleteJapaSession,
   saveRecitationLog, getRecitationLogs, deleteRecitationLog, // Added deleteRecitationLog
   saveGratitudeNote, getGratitudeNotes, deleteGratitudeNote,
   getGoals, saveGoal, updateGoalStatus, deleteGoal,
-  exportAllData, importAllData, // Add new functions here
+  exportAllData, importAllData, wipeAllData, // Added wipeAllData function
 };

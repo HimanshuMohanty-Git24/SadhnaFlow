@@ -28,7 +28,8 @@
 ## 📱 Demo Video
 
 <div align="center">
-  <a href="https://github.com/user-attachments/assets/20366221-f6dd-43a0-93df-4aff99f58183">Watch Demo</a>
+
+  <https://github.com/user-attachments/assets/20366221-f6dd-43a0-93df-4aff99f58183>
   
   <em>Experience the divine journey through SadhnaFlow</em>
   

@@ -1,185 +1,150 @@
 # 🕉️ SadhnaFlow - Digital Sadhana Companion
+
 <div align="center">
-<img src="./assets/images/icon.png" alt="SadhnaFlow Logo" width="120" height="120">
-
-॥ ॐ भैरवाय नमः ॥
-
-"धर्मे च अर्थे च कामे च मोक्षे च भरतर्षभ।
-यदिहास्ति तदन्यत्र यन्नेहास्ति न तत्क्वचित्॥"
-
-"Whatever exists here, exists elsewhere too. What does not exist here, does not exist anywhere."
-
+  <img src="./assets/images/icon.png" alt="SadhnaFlow Logo" width="120" height="120">
+  
+  ॥ ॐ भैरवाय नमः ॥
+  
+  <em>"धर्मे च अर्थे च कामे च मोक्षे च भरतर्षभ।<br>
+  यदिहास्ति तदन्यत्र यन्नेहास्ति न तत्क्वचित्॥"</em>
+  
+  <em>"Whatever exists here, exists elsewhere too. What does not exist here, does not exist anywhere."</em>
 </div>
 
 <div align="center">
-🙏 श्री कालभैरव स्तुति
-
-<https://github.com/user-attachments/assets/60196a6d-5c81-4384-8972-12ab1d350b47>
-
-॥ॐ क्रों कालभैरवाय नमः॥
-
-काल भैरव काल भैरव काल भैरव पाहि माम्।
-त्राहि माम् शरणागत देहि मे शरणम् सदा॥
-
-Kaal Bhairav Kaal Bhairav Kaal Bhairav Paahi Maam
-Traahi Maam Sharanagata Dehi Me Sharanam Sadaa
-
+  <strong>🙏 श्री कालभैरव स्तुति</strong>
+  
+  <a href="https://github.com/user-attachments/assets/60196a6d-5c81-4384-8972-12ab1d350b47">Audio Link</a>
+  
+  <strong>॥ॐ क्रों कालभैरवाय नमः॥</strong>
+  
+  <em>काल भैरव काल भैरव काल भैरव पाहि माम्।<br>
+  त्राहि माम् शरणागत देहि मे शरणम् सदा॥</em>
+  
+  <em>Kaal Bhairav Kaal Bhairav Kaal Bhairav Paahi Maam<br>
+  Traahi Maam Sharanagata Dehi Me Sharanam Sadaa</em>
 </div>
 
-📱 Demo Video
+## 📱 Demo Video
+
 <div align="center">
-
-
-
-
-https://github.com/user-attachments/assets/20366221-f6dd-43a0-93df-4aff99f58183
-
-
-
-Experience the divine journey through SadhnaFlow
-
-📱 See in Action: Immersive Vigraha Gallery • Dynamic Insights • Advanced Japa Logging • Full Data Control
-
+  <a href="https://github.com/user-attachments/assets/20366221-f6dd-43a0-93df-4aff99f58183">Watch Demo</a>
+  
+  <em>Experience the divine journey through SadhnaFlow</em>
+  
+  <strong>See in Action:</strong> Immersive Vigraha Gallery • Dynamic Insights • Advanced Japa Logging • Full Data Control
 </div>
 
-✨ About SadhnaFlow
+---
+
+## ✨ About SadhnaFlow
 
 SadhnaFlow is a sacred digital companion designed to enhance your spiritual journey through traditional Hindu practices. Dedicated to श्री कालभैरव (Shri Kaal Bhairav), this app brings ancient wisdom into the modern era, helping devotees maintain consistent sadhana (spiritual practice) with devotion and discipline.
 
-🌟 Spiritual Significance
+### 🌟 Spiritual Significance
 
-"साधना वे करता है जो स्वयं को जानना चाहता है"
-"Sadhana is done by one who wishes to know oneself"
-
+<blockquote>
+  "साधना वे करता है जो स्वयं को जानना चाहता है"
+  <br>
+  "Sadhana is done by one who wishes to know oneself"
+</blockquote>
 In the tradition of Sanatan Dharma, regular spiritual practice is the pathway to self-realization. SadhnaFlow honors this sacred tradition by providing tools for mantra chanting, a sacred audio library, goal tracking, a spiritual journal, and powerful progress analytics.
 
-📱 Features
-🔢 Advanced Japa Counter & History
+---
 
-Active Digital Mala: A large, tactile counter for real-time chanting with haptic and audio feedback.
+## 📱 Features
 
-Batch Mālā Logging: Log mālās you've completed offline with an elegant, transforming UI.
+### 🔢 Advanced Japa Counter & History
 
-Dynamic History Panel: A collapsible panel reveals your complete practice history without cluttering the screen.
+- **Active Digital Mala:** Large, tactile counter for real-time chanting with haptic and audio feedback.
+- **Batch Mālā Logging:** Log mālās completed offline with an elegant, transforming UI.
+- **Dynamic History Panel:** Collapsible panel reveals your complete practice history without clutter.
+- **Advanced Filtering:** Instantly view Japa and Recitation logs from any month and year.
+- **Full Log Management:** Easily delete incorrect entries to keep records pristine.
 
-Advanced Filtering: Instantly view your Japa and Recitation logs from any month and year.
+### 🕉️ Immersive Vigraha (Divine Form)
 
-Full Log Management: Easily delete incorrect entries to keep your records pristine.
+- **Interactive Divine Gallery:** Stunning, fluid carousel of sacred Vigrahas.
+- **Divine Glow Effect:** Focused deity highlighted with animated glow for meditative focus.
+- **Richer Content:** Each Vigraha includes Hindi name and a spiritual description.
+- **Intuitive Fullscreen View:** Tap to expand, swipe down/double-tap/close to return.
 
-🕉️ Immersive Vigraha (Divine Form)
+### 📊 Dynamic Insights & Analytics
 
-Interactive Divine Gallery: A stunning, fluid carousel of sacred Vigrahas that is larger and more immersive.
+- **Unified Dashboard:** Track progress with a clean, centralized insights panel.
+- **Weekly vs. Lifetime Toggle:** Switch between last 7 days and entire Sadhana journey.
+- **Comparative Analysis:** Toggle between Japa and Recitation statistics.
+- **Streak Counter:** Track consecutive days of practice with a flame icon.
 
-Divine Glow Effect: The focused deity is highlighted with a beautiful, animated glow, enhancing meditative focus.
+### 📖 Sacred Library & Community
 
-Richer Content: Each Vigraha includes their name in Hindi and a one-line spiritual description.
+- **Stotras & Audio:** Sacred prayers with synchronized audio and text.
+- **Community Hub:** Direct link to join our Reddit community for questions and insights.
 
-Intuitive Fullscreen View: Tap to expand a Vigraha, and easily return by swiping down, double-tapping, or using the close button.
+### ✍️ Spiritual Journal & Goals
 
-📊 Dynamic Insights & Analytics
+- **Gratitude Journal:** Record daily spiritual experiences, insights, and gratitude. Month-based filter for easy revisit.
+- **Saṅkalpa (Goal) Setting:** Set and track spiritual and material goals.
 
-Unified Dashboard: Track your progress with a clean, centralized insights panel.
+### ⚙️ Settings & Data Management
 
-Weekly vs. Lifetime Toggle: Instantly switch between your performance over the last 7 days and your entire Sadhana journey.
+- **Complete Data Control:** Dedicated Settings tab for data management.
+- **Export & Import Progress:** Backup/restore Sadhana history to a file or new device.
+- **Wipe All Data:** "Fresh start" option to reset all app data after confirmations.
 
-Comparative Analysis: Seamlessly toggle between your Japa and Recitation statistics to understand your practice patterns.
+---
 
-Streak Counter: Stay motivated by tracking your consecutive days of practice with a beautiful flame icon.
+## 🛠️ Technology Stack
 
-📖 Sacred Library & Community
+- **Framework:** React Native with Expo
+- **Language:** TypeScript
+- **Navigation:** Expo Router
+- **Storage:** AsyncStorage
+- **Audio:** Expo AV
+- **Key Libraries:** React Native Gesture Handler, Reanimated, Picker
 
-Stotras & Audio: A collection of sacred prayers with synchronized audio and text.
+---
 
-Community Hub: The library now features a direct link to join our Reddit community, a space for fellow sadhaks to ask questions and share insights.
+## 🚀 Getting Started
 
-✍️ Spiritual Journal & Goals
+### Prerequisites
 
-Gratitude Journal: Record your daily spiritual experiences, insights, and gratitude with a month-based filter to easily revisit past entries.
+- Node.js (v18 or higher)
+- npm or yarn
+- Expo CLI
+- Android Studio / Xcode (for device testing)
 
-Saṅkalpa (Goal) Setting: Set and track both your spiritual and material goals to maintain discipline and focus.
+### Installation
 
-⚙️ Settings & Data Management
+Clone the sacred repository:
 
-Complete Data Control: A dedicated Settings tab puts you in charge of your data.
-
-Export & Import Progress: Easily back up your entire Sadhana history to a file and restore it on a new device.
-
-Wipe All Data: A "fresh start" option to safely and completely reset all app data after multiple confirmations.
-
-🛠️ Technology Stack
-
-Framework: React Native with Expo
-
-Language: TypeScript
-
-Navigation: Expo Router
-
-Storage: AsyncStorage
-
-Audio: Expo AV
-
-Key Libraries: React Native Gesture Handler, Reanimated, Picker
-
-🚀 Getting Started
-Prerequisites
-
-Node.js (v18 or higher)
-
-npm or yarn
-
-Expo CLI
-
-Android Studio / Xcode (for device testing)
-
-Installation
-
-Clone the sacred repository
-
-code
-Bash
-download
-content_copy
-expand_less
-
-git clone <https://github.com/yourusername/SadhnaFlow.git>
+```bash
+git clone https://github.com/yourusername/SadhnaFlow.git
 cd SadhnaFlow
+```
 
-Install dependencies
+Install dependencies:
 
-code
-Bash
-download
-content_copy
-expand_less
-IGNORE_WHEN_COPYING_START
-IGNORE_WHEN_COPYING_END
+```bash
 npm install
+```
 
-Start the development server
+Start the development server:
 
-code
-Bash
-download
-content_copy
-expand_less
-IGNORE_WHEN_COPYING_START
-IGNORE_WHEN_COPYING_END
+```bash
 npx expo start
+```
 
-Run on device
+Run on device:
 
-Scan QR code with Expo Go app
+- Scan QR code with Expo Go app
+- Or run on emulator/simulator
 
-Or run on emulator/simulator
+---
 
-📂 Project Structure
-code
-Code
-download
-content_copy
-expand_less
-IGNORE_WHEN_COPYING_START
-IGNORE_WHEN_COPYING_END
+## 📂 Project Structure
+
+```text
 SadhnaFlow/
 ├── app/
 │   ├── (tabs)/
@@ -200,71 +165,66 @@ SadhnaFlow/
 ├── services/
 │   └── StorageService.ts    # Local data management (CRUD + Backup/Restore)
 └── hooks/
-🌸 Why Spiritual Practice Matters
-Mental Peace & Clarity
+```
 
-Reduces Stress: Regular chanting and meditation activate the parasympathetic nervous system.
+---
 
-Improves Focus: Mantra repetition enhances concentration and mental clarity.
+## 🌸 Why Spiritual Practice Matters
 
-Emotional Balance: Spiritual practices help regulate emotions and reduce anxiety.
+### Mental Peace & Clarity
 
-Spiritual Growth
+- **Reduces Stress:** Regular chanting and meditation activate the parasympathetic nervous system.
+- **Improves Focus:** Mantra repetition enhances concentration and mental clarity.
+- **Emotional Balance:** Spiritual practices help regulate emotions and reduce anxiety.
 
-Self-Awareness: Regular sadhana leads to deeper self-understanding.
+### Spiritual Growth
 
-Divine Connection: Consistent practice strengthens the bond with the divine.
+- **Self-Awareness:** Regular sadhana leads to deeper self-understanding.
+- **Divine Connection:** Consistent practice strengthens the bond with the divine.
+- **Karmic Purification:** Sacred chants help purify negative karmas.
 
-Karmic Purification: Sacred chants help purify negative karmas.
+---
 
-🤝 Contributing
+## 🤝 Contributing
 
 We welcome contributions to enhance this sacred digital companion. Please:
 
-Fork the repository
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/Divine-Enhancement`)
+3. Make your changes with devotion
+4. Submit a pull request
 
-Create a feature branch (git checkout -b feature/Divine-Enhancement)
+**Guidelines**
 
-Make your changes with devotion
+- Maintain the spiritual essence of the app
+- Test all features thoroughly
+- Follow TypeScript best practices
+- Add appropriate documentation
 
-Submit a pull request
+---
 
-Guidelines
-
-Maintain the spiritual essence of the app
-
-Test all features thoroughly
-
-Follow TypeScript best practices
-
-Add appropriate documentation
-
-📄 License
+## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-🙏 Acknowledgments
+---
 
-श्री कालभैरव for divine inspiration
+## 🙏 Acknowledgments
 
-Sanatan Dharma tradition for timeless wisdom
-
-Audio Contributors for sacred recordings
-
-Beta Testers for valuable feedback
-
-Open Source Community for tools and libraries
+- श्री कालभैरव for divine inspiration
+- Sanatan Dharma tradition for timeless wisdom
+- Audio Contributors for sacred recordings
+- Beta Testers for valuable feedback
+- Open Source Community for tools and libraries
 
 <div align="center">
-<img src="./assets/images/icon.png" alt="SadhnaFlow" width="60" height="60">
-
-॥ हर हर महादेव ॥
-॥ श्री कालभैरवाय नमः ॥
-
-May this digital companion guide you on your spiritual journey
-आपकी आध्यात्मिक यात्रा में यह दिव्य साथी आपका मार्गदर्शन करे
-
-Made with 🕉️ and ❤️ for the spiritual community
-
+  <img src="./assets/images/icon.png" alt="SadhnaFlow" width="60" height="60">
+  <br>
+  <strong>॥ हर हर महादेव ॥<br>
+  ॥ श्री कालभैरवाय नमः ॥</strong>
+  <br>
+  May this digital companion guide you on your spiritual journey<br>
+  आपकी आध्यात्मिक यात्रा में यह दिव्य साथी आपका मार्गदर्शन करे
+  <br>
+  Made with 🕉️ and ❤️ for the spiritual community
 </div>
-

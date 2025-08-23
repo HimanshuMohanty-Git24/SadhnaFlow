@@ -61,13 +61,6 @@ const images = [
   },
   { 
     id: '6', 
-    source: require('@/assets/images/Batuka_Bhairav_meditative.jpg'), 
-    name: 'Meditating Bhairav', 
-    hindiName: 'ध्यानस्थ भैरव', 
-    description: 'Lord Bhairava in a deep state of meditation, radiating peace.' 
-  },
-  { 
-    id: '7', 
     source: require('@/assets/images/Panchmukhi_Hanuman_Ji.jpeg'), 
     name: 'Panchmukhi Hanuman', 
     hindiName: 'पंचमुखी हनुमान जी', 
